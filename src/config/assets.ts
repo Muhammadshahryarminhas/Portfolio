@@ -1,0 +1,90 @@
+export const assets = {
+  avatar: "/images/My avatar.png",
+  tick: "/images/SealCheck.png",
+  menuIcon: "/images/DotsThreeOutline.svg",
+  clientLogos: [
+    "/images/Logo short 1.png",
+    "/images/Logo short 2.png",
+    "/images/Logo short 3.png",
+    "/images/Logo short 4.png",
+  ],
+  brands: [
+    {
+      gray: "/images/Aramco-gray.png",
+      color: "/images/Aramco.png",
+      alt: "Aramco",
+      tooltip:
+        "Mobile employee onboarding app with gamified learning about the company, plus a dashboard to manage mobile content.",
+      width: 120,
+      height: 25,
+      scale: 1,
+    },
+    {
+      gray: "/images/network internation-gray.png",
+      color: "/images/network internation.png",
+      alt: "Network International",
+      tooltip: "Developer portal with a try-it feature for API exploration and integration.",
+      width: 108,
+      height: 28,
+      scale: 1,
+    },
+    {
+      gray: "/images/dentsco-gray.png",
+      color: "/images/dentsco.png",
+      alt: "Dentsco",
+      tooltip:
+        "Mobile app that detects vehicle dents using AI — snap a photo and get instant damage analysis.",
+      width: 92,
+      height: 19,
+      scale: 1,
+    },
+    {
+      gray: "/images/engro-gray.png",
+      color: "/images/engro.png",
+      alt: "Engro Corp",
+      tooltip: "Developer portal for Engro's digital products and API documentation.",
+      width: 72,
+      height: 31,
+      scale: 1.2,
+    },
+    {
+      gray: "/images/MOC-gray.png",
+      color: "/images/MOC.png",
+      alt: "Ministry of Culture",
+      tooltip:
+        "Metaverse game that brings Saudi culture to life through immersive interactive experiences.",
+      width: 56,
+      height: 31,
+      scale: 1.4,
+    },
+    {
+      gray: "/images/T&L-gray.png",
+      color: "/images/T&L.png",
+      alt: "Travel & Leisure",
+      tooltip:
+        "Developer portal for Travel & Leisure's digital products and API documentation.",
+      width: 120,
+      height: 34,
+      scale: 1.2,
+    },
+  ],
+  snaps: {
+    rowOne: [
+      "/images/snaps/veritaz-desktop.png",
+      "/images/snaps/veritaz-mobile.png",
+      "/images/snaps/technology-hero.png",
+      "/images/snaps/editor-toolbar-dark.png",
+      "/images/snaps/editor-toolbar-light.png",
+      "/images/snaps/palm-beaches-onboarding.png",
+      "/images/snaps/palm-beaches-stories.png",
+    ],
+    rowTwo: [
+      "/images/snaps/dashboard.png",
+      "/images/snaps/dents-measure.png",
+      "/images/snaps/tq-quote.png",
+      "/images/snaps/solux-laptop.png",
+      "/images/snaps/solux-hero.png",
+      "/images/snaps/solux-collage.png",
+    ],
+  },
+} as const;
