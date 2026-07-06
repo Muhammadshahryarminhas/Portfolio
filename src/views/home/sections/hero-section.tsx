@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BookCallButton } from "@/components/book-call-button";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Navbar } from "@/components/navbar";
@@ -22,7 +23,7 @@ export function HeroSection() {
 
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 py-24 text-center md:px-8 md:py-32">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-6">
-          <p className="text-sm font-normal text-neutral-800 md:text-base">
+          <p className="text-lg font-normal text-neutral-800 md:text-xl">
             👋 Hey, I&apos;m <span className="font-semibold">{siteConfig.shortName}</span>
           </p>
 
@@ -56,10 +57,10 @@ export function HeroSection() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-            <Button render={<a href={`mailto:${siteConfig.links.email}`} />} variant="lime" size="pill-lg">
+            <BookCallButton variant="hero-dark" size="pill-lg" className="h-14">
               Let&apos;s Start Project Discussion
-            </Button>
-            <Button render={<a href="#projects" />} variant="lime" size="pill-lg">
+            </BookCallButton>
+            <Button render={<a href="#projects" />} variant="lime" size="pill-lg" className="h-14">
               View Projects
             </Button>
           </div>

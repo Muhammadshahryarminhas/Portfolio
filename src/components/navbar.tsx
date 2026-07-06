@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { BookCallButton } from "@/components/book-call-button";
 import { assets } from "@/config/assets";
 import { heroNavLinks, siteConfig } from "@/config/site";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -17,7 +17,11 @@ function MenuIcon() {
   );
 }
 
-export function Navbar() {
+type NavbarProps = {
+  linkPrefix?: string;
+};
+
+export function Navbar({ linkPrefix = "" }: NavbarProps) {
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -63,7 +67,7 @@ export function Navbar() {
           "border border-white/40 bg-white/30",
           "backdrop-blur-sm backdrop-saturate-150",
           "transition-[width] duration-500 ease-in-out",
-          showInlineNav ? "w-[640px]" : "w-[280px]",
+          showInlineNav ? "w-[640px]" : "w-[320px]",
           "max-w-[calc(100%-2rem)]"
         )}
         onMouseEnter={() => isCompact && openMenu()}
@@ -74,20 +78,20 @@ export function Navbar() {
         />
 
         <Link href="/" className="relative z-10 flex min-w-0 shrink-0 items-center gap-2.5">
-          <div className="relative size-[41px] shrink-0 overflow-hidden rounded-full">
+          <div className="relative size-[56px] shrink-0 overflow-hidden rounded-full">
             <Image
               src={assets.avatar}
               alt={siteConfig.name}
               fill
               className="object-cover"
-              sizes="41px"
+              sizes="56px"
             />
           </div>
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold leading-tight text-neutral-900">
+            <p className="truncate text-lg font-semibold leading-tight text-neutral-900">
               {siteConfig.name}
             </p>
-            <p className="truncate text-xs text-neutral-500">{siteConfig.links.email}</p>
+            <p className="truncate text-md text-neutral-500">{siteConfig.links.email}</p>
           </div>
         </Link>
 
@@ -104,10 +108,10 @@ export function Navbar() {
             {heroNavLinks.map(({ href, label }) => (
               <li key={href}>
                 <Link
-                  href={href}
+                  href={`${linkPrefix}${href}`}
                   onClick={closeMenu}
                   className={cn(
-                    "whitespace-nowrap text-sm font-medium text-neutral-900/70 transition-colors hover:text-neutral-900"
+                    "whitespace-nowrap text-lg font-medium text-neutral-900/70 transition-colors hover:text-neutral-900"
                   )}
                 >
                   {label}
@@ -115,14 +119,9 @@ export function Navbar() {
               </li>
             ))}
           </ul>
-          <Button
-            render={<a href={`mailto:${siteConfig.links.email}`} />}
-            variant="lime"
-            size="pill"
-            onClick={closeMenu}
-          >
+          <BookCallButton variant="lime" size="pill-lg" className="h-14" onClick={closeMenu}>
             Book a call
-          </Button>
+          </BookCallButton>
         </div>
 
         <button

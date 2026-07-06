@@ -71,6 +71,7 @@
   --radius-4xl: calc(var(--radius) * 2.6);
   --animate-marquee-left: marquee-left 80s linear infinite;
   --animate-marquee-right: marquee-right 80s linear infinite;
+  --animate-footer-ticker: marquee-left 45s linear infinite;
 }
 
 :root {
@@ -163,5 +164,30 @@
 @layer components {
   .section-container {
     @apply mx-auto w-full max-w-7xl px-4 md:px-8;
+  }
+
+  .ai-chat-glow {
+    background: linear-gradient(
+      135deg,
+      #bfdbfe,
+      #ddd6fe,
+      #a5f3fc,
+      #bbf7d0,
+      #e9d5ff,
+      #bfdbfe
+    );
+    background-size: 300% 300%;
+    animation: ai-border-glow 12s ease-in-out infinite;
+    opacity: 0.9;
+  }
+}
+
+@keyframes ai-border-glow {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
 }

@@ -69,7 +69,7 @@ export function HeroSocialProof() {
               <Star key={i} className="size-3.5 fill-amber-400 text-amber-400" />
             ))}
           </div>
-          <p className="whitespace-nowrap text-sm text-[#373737]">Trusted by 20+ brands</p>
+          <p className="whitespace-nowrap text-md text-[#373737]">Trusted by 20+ brands</p>
         </div>
       </div>
 

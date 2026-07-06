@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Anek_Latin } from "next/font/google";
+import { CalEmbedProvider } from "@/components/cal-embed-provider";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
 
@@ -24,7 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${anekLatin.variable} h-full antialiased`}>
-      <body className="min-h-full font-sans">{children}</body>
+      <body className="min-h-full font-sans">
+        <CalEmbedProvider>{children}</CalEmbedProvider>
+      </body>
     </html>
   );
 }

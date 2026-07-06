@@ -7,15 +7,18 @@ export const siteConfig = {
   url: "https://shahryarminhas.com",
   links: {
     email: "graphy818@gmail.com",
-    linkedin: "https://linkedin.com",
-    dribbble: "https://dribbble.com",
-    behance: "https://behance.net",
+    linkedin: "https://www.linkedin.com/in/shahryarminhas/",
+    dribbble: "https://dribbble.com/shahryart",
+    behance: "https://www.behance.net/shahryar-minhas",
+    github: "https://github.com/Muhammadshahryarminhas/",
+    instagram: "https://www.instagram.com/shahryarminhas",
   },
 } as const;
 
 export const heroNavLinks = [
-  { href: "#selected-snaps", label: "Snaps" },
-  { href: "#projects", label: "Projects" },
+  { href: "#projects", label: "Work" },
+  { href: "#profile", label: "About" },
+  { href: "#pricing", label: "Pricing" },
 ] as const;
 
 export const heroFeatures = [
