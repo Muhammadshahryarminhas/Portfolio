@@ -10,7 +10,7 @@ export async function NotFoundPage() {
   const motivation = await getDailyMotivation();
 
   return (
-    <div className="relative flex min-h-screen flex-col overflow-hidden bg-[#bee5f8]">
+    <div className="relative flex h-svh flex-col overflow-hidden bg-[#bee5f8]">
       <Image
         src="/images/404/bg-texture.png"
         alt=""
@@ -20,39 +20,31 @@ export async function NotFoundPage() {
         priority
       />
 
-      <p
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center -translate-y-[8%] select-none text-[clamp(12rem,40vw,48rem)] font-bold leading-none tracking-tighter text-black/[0.02]"
-      >
-        404
-      </p>
-
       <Navbar linkPrefix="/" />
 
-      <main className="relative z-10 mx-auto flex w-full max-w-[874px] flex-1 flex-col items-center gap-8 px-4 pt-32 pb-[42vh] text-center md:pt-40">
-        <h1 className="text-3xl font-semibold leading-tight tracking-tight text-black md:text-5xl">
+      <main className="relative z-10 mx-auto flex w-full max-w-[396px] flex-1 -translate-y-35 flex-col items-center justify-center gap-8 px-4 text-center md:max-w-[874px] md:translate-y-0 md:gap-8 md:px-8 md:pb-[42vh]">
+        <h1 className="w-full text-[32px] font-semibold leading-[1.2] tracking-[-1px] text-black md:text-5xl md:leading-tight md:tracking-tight">
           Oh sure, I bet you&apos;re searching for something that doesn&apos;t even exist.
         </h1>
 
-
-
-        <p className="text-xl tracking-tight text-black md:text-[28px]">
-          <span className="font-bold">Todays Motivation</span>{" "}
-          <span className="font-normal">&ldquo;{motivation}&rdquo;</span>
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-2.5">
-          <Button render={<Link href="/" />} variant="lime" size="pill-lg" className="h-14">
-            Go to Home Page
+        <div className="flex w-full flex-col gap-2.5 md:max-w-none md:flex-row md:flex-wrap md:items-center md:justify-center">
+          <Button render={<Link href="/" />} variant="lime" size="pill-lg" className="h-14 w-full md:w-auto">
+            GO TO HOME PAGE
           </Button>
           <Button
             render={<a href={`mailto:${siteConfig.links.email}`} />}
             variant="hero-dark"
             size="pill-lg"
-            className="h-14"
+            className="h-14 w-full md:w-auto md:whitespace-nowrap"
           >
-            Send me an Email to discuss
+            SEND ME AN EMAIL TO DISCUSS
           </Button>
         </div>
+
+        <p className="w-full text-[21px] leading-[1.2] tracking-tight text-black">
+          <span className="font-bold">Today&apos;s Motivation</span>{" "}
+          <span className="font-normal">&ldquo;{motivation}&rdquo;</span>
+        </p>
       </main>
 
       <EyeCharacter />

@@ -1,5 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import { ArrowRight, Check, Gift, ShieldCheck } from "lucide-react";
 import { BookCallButton } from "@/components/book-call-button";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const mvpFeatures = [
   "Complete high-fidelity UI/UX redesign in Figma",
@@ -35,17 +40,56 @@ const enterpriseBenefits = [
   "Direct access via Slack & daily standups",
 ];
 
+function MobilePricingCta({ children }: { children: React.ReactNode }) {
+  return <div className="md:hidden">{children}</div>;
+}
+
+function MobileDetailsToggle({
+  detailsOpen,
+  onToggle,
+  dark = false,
+}: {
+  detailsOpen: boolean;
+  onToggle: () => void;
+  dark?: boolean;
+}) {
+  return (
+    <Button
+      type="button"
+      variant="ghost"
+      size="pill-lg"
+      onClick={onToggle}
+      className={cn(
+        "h-14 w-full rounded-full border bg-transparent md:hidden",
+        dark
+          ? "border-white/25 text-white hover:bg-white/10 hover:text-white"
+          : "border-[#dcdcdc] text-black hover:bg-[#fafafa]"
+      )}
+    >
+      {detailsOpen ? "SHOW LESS" : "SEE DETAILS"}
+    </Button>
+  );
+}
+
+function DesktopPricingCta({ children }: { children: React.ReactNode }) {
+  return <div className="hidden w-full pt-10 md:flex">{children}</div>;
+}
+
 export function PricingSection() {
+  const [mvpOpen, setMvpOpen] = useState(false);
+  const [retainerOpen, setRetainerOpen] = useState(false);
+  const [enterpriseOpen, setEnterpriseOpen] = useState(false);
+
   return (
     <section id="pricing" className="bg-[#ecf7ff] px-4 py-14 md:px-8">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8">
-        <h2 className="type-h2">
-          Choose your path to a better product
+        <h2 className="text-2xl font-semibold uppercase leading-[31.2px] tracking-[-0.72px] text-black md:text-[32px] md:leading-[1.2] md:tracking-[-1px]">
+          CHOOSE YOUR PATH TO A BETTER PRODUCT
         </h2>
 
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-4 md:flex-row md:items-stretch">
-            <div className="flex flex-1 flex-col justify-between rounded-[32px] bg-white p-8">
+            <div className="flex flex-1 flex-col rounded-[32px] bg-white p-8">
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-2">
                   <p className="text-[32px] font-semibold leading-none tracking-[-1px] text-black">
@@ -70,66 +114,94 @@ export function PricingSection() {
                   </p>
                 </div>
 
-                <div className="flex flex-col gap-5">
-                  <p className="type-body font-semibold tracking-[1px] text-black">What You Get</p>
-                  <div className="flex flex-col gap-3">
-                    {mvpFeatures.map((item) => (
-                      <div key={item} className="flex items-center gap-3">
-                        <ArrowRight className="size-[18px] shrink-0 text-[#1f85ff]" />
-                        <p className="type-body flex-1">{item}</p>
+                <MobilePricingCta>
+                  <BookCallButton variant="hero-dark" size="pill-lg" className="h-14 w-full">
+                    BOOK FREE 30-MIN STRATEGY CALL
+                  </BookCallButton>
+                </MobilePricingCta>
+
+                {!mvpOpen && (
+                  <MobileDetailsToggle
+                    detailsOpen={false}
+                    onToggle={() => setMvpOpen(true)}
+                  />
+                )}
+
+                <div
+                  className={cn(
+                    "flex-col gap-6",
+                    mvpOpen ? "flex" : "hidden",
+                    "md:flex"
+                  )}
+                >
+                  <div className="flex flex-col gap-5">
+                    <p className="type-body font-semibold tracking-[1px] text-black">What You Get</p>
+                    <div className="flex flex-col gap-3">
+                      {mvpFeatures.map((item) => (
+                        <div key={item} className="flex items-center gap-3">
+                          <ArrowRight className="size-[18px] shrink-0 text-[#1f85ff]" />
+                          <p className="type-body flex-1">{item}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-5">
+                    <p className="type-body font-semibold tracking-[1px] text-black">
+                      Zero-Risk Guarantees
+                    </p>
+                    <div className="flex flex-col gap-3">
+                      <div className="flex items-center gap-2">
+                        <ShieldCheck className="size-[14px] shrink-0 text-[#1f85ff]" />
+                        <p className="type-body flex-1">
+                          <span className="font-semibold text-black">On-Time Delivery:</span> 100%
+                          refund if not delivered in 8 weeks
+                        </p>
                       </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-5">
-                  <p className="type-body font-semibold tracking-[1px] text-black">
-                    Zero-Risk Guarantees
-                  </p>
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-2">
-                      <ShieldCheck className="size-[14px] shrink-0 text-[#1f85ff]" />
-                      <p className="type-body flex-1">
-                        <span className="font-semibold text-black">On-Time Delivery:</span> 100%
-                        refund if not delivered in 8 weeks
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <ShieldCheck className="size-[14px] shrink-0 text-[#1f85ff]" />
-                      <p className="type-body flex-1">
-                        <span className="font-semibold text-black">Unlimited Revisions:</span>{" "}
-                        Until you&apos;re 100% satisfied
-                      </p>
+                      <div className="flex items-center gap-2">
+                        <ShieldCheck className="size-[14px] shrink-0 text-[#1f85ff]" />
+                        <p className="type-body flex-1">
+                          <span className="font-semibold text-black">Unlimited Revisions:</span>{" "}
+                          Until you&apos;re 100% satisfied
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="flex items-center gap-4 rounded-2xl bg-[rgba(31,133,255,0.03)] p-6">
-                  <div className="flex size-10 shrink-0 items-center justify-center">
-                    <Gift className="size-6 text-[#1f85ff]" />
+                  <div className="flex items-center gap-4 rounded-2xl bg-[rgba(31,133,255,0.03)] p-6">
+                    <div className="flex size-10 shrink-0 items-center justify-center">
+                      <Gift className="size-6 text-[#1f85ff]" />
+                    </div>
+                    <div className="flex flex-1 flex-col gap-1">
+                      <p className="type-body font-semibold tracking-[-1px] text-[#1f85ff]">
+                        Free Bonus (Worth $997)
+                      </p>
+                      <p className="type-body text-black">
+                        48-Hour Recorded UX Teardown + Prioritized Roadmap
+                      </p>
+                      <p className="type-caption">
+                        (Fully deducted if you proceed with the revamp)
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex flex-1 flex-col gap-1">
-                    <p className="type-body font-semibold tracking-[-1px] text-[#1f85ff]">
-                      Free Bonus (Worth $997)
-                    </p>
-                    <p className="type-body text-black">
-                      48-Hour Recorded UX Teardown + Prioritized Roadmap
-                    </p>
-                    <p className="type-caption">
-                      (Fully deducted if you proceed with the revamp)
-                    </p>
-                  </div>
+
+                  {mvpOpen && (
+                    <MobileDetailsToggle
+                      detailsOpen
+                      onToggle={() => setMvpOpen(false)}
+                    />
+                  )}
                 </div>
               </div>
 
-              <div className="flex pt-10">
+              <DesktopPricingCta>
                 <BookCallButton variant="hero-dark" size="pill-lg" className="h-14 flex-1">
                   BOOK FREE 30-MIN STRATEGY CALL
                 </BookCallButton>
-              </div>
+              </DesktopPricingCta>
             </div>
 
-            <div className="flex flex-1 flex-col justify-between rounded-[32px] bg-white p-8">
+            <div className="flex flex-1 flex-col rounded-[32px] bg-white p-8">
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-4">
@@ -161,42 +233,70 @@ export function PricingSection() {
                   </p>
                 </div>
 
-                <div className="flex flex-col gap-5">
-                  <p className="type-body font-semibold tracking-[1px] text-black">
-                    What You Get Every Month
-                  </p>
-                  <div className="flex flex-col gap-3">
-                    {retainerFeatures.map((item) => (
-                      <div key={item} className="flex items-center gap-3">
-                        <ArrowRight className="size-[18px] shrink-0 text-[#1f85ff]" />
-                        <p className="type-body flex-1">{item}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <MobilePricingCta>
+                  <BookCallButton variant="lime" size="pill-lg" className="h-14 w-full">
+                    BOOK FREE 30-MIN STRATEGY CALL
+                  </BookCallButton>
+                </MobilePricingCta>
 
-                <div className="flex flex-col gap-5">
-                  <p className="type-body font-semibold tracking-[1px] text-black">All Inclusions</p>
-                  <div className="flex flex-col gap-3">
-                    {retainerInclusions.map((item) => (
-                      <div key={item} className="flex items-center gap-3">
-                        <Check className="size-[14px] shrink-0 text-[#1f85ff]" />
-                        <p className="type-body flex-1">{item}</p>
-                      </div>
-                    ))}
+                {!retainerOpen && (
+                  <MobileDetailsToggle
+                    detailsOpen={false}
+                    onToggle={() => setRetainerOpen(true)}
+                  />
+                )}
+
+                <div
+                  className={cn(
+                    "flex-col gap-6",
+                    retainerOpen ? "flex" : "hidden",
+                    "md:flex"
+                  )}
+                >
+                  <div className="flex flex-col gap-5">
+                    <p className="type-body font-semibold tracking-[1px] text-black">
+                      What You Get Every Month
+                    </p>
+                    <div className="flex flex-col gap-3">
+                      {retainerFeatures.map((item) => (
+                        <div key={item} className="flex items-center gap-3">
+                          <ArrowRight className="size-[18px] shrink-0 text-[#1f85ff]" />
+                          <p className="type-body flex-1">{item}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
+
+                  <div className="flex flex-col gap-5">
+                    <p className="type-body font-semibold tracking-[1px] text-black">All Inclusions</p>
+                    <div className="flex flex-col gap-3">
+                      {retainerInclusions.map((item) => (
+                        <div key={item} className="flex items-center gap-3">
+                          <Check className="size-[14px] shrink-0 text-[#1f85ff]" />
+                          <p className="type-body flex-1">{item}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {retainerOpen && (
+                    <MobileDetailsToggle
+                      detailsOpen
+                      onToggle={() => setRetainerOpen(false)}
+                    />
+                  )}
                 </div>
               </div>
 
-              <div className="flex pt-10">
+              <DesktopPricingCta>
                 <BookCallButton variant="lime" size="pill-lg" className="h-14 flex-1">
                   BOOK FREE 30-MIN STRATEGY CALL
                 </BookCallButton>
-              </div>
+              </DesktopPricingCta>
             </div>
           </div>
 
-          <div className="flex flex-col gap-20 rounded-[32px] border border-white/8 bg-[#121212] p-8 md:flex-row md:items-center">
+          <div className="flex flex-col gap-6 rounded-[32px] border border-white/8 bg-[#121212] p-8 md:flex-row md:items-center md:gap-20">
             <div className="flex flex-1 flex-col gap-6">
               <div className="flex flex-col gap-2">
                 <p className="text-[32px] font-semibold leading-none tracking-[-1px] text-white">
@@ -207,14 +307,35 @@ export function PricingSection() {
                   high-impact scaling.
                 </p>
               </div>
-              <div className="flex pt-3">
+
+              <MobilePricingCta>
+                <BookCallButton variant="lime" size="pill-lg" className="h-14 w-full">
+                  SCHEDULE AN INTERVIEW
+                </BookCallButton>
+              </MobilePricingCta>
+
+              {!enterpriseOpen && (
+                <MobileDetailsToggle
+                  dark
+                  detailsOpen={false}
+                  onToggle={() => setEnterpriseOpen(true)}
+                />
+              )}
+
+              <DesktopPricingCta>
                 <BookCallButton variant="lime" size="pill-lg" className="h-14 w-[320px] max-w-full">
                   SCHEDULE AN INTERVIEW
                 </BookCallButton>
-              </div>
+              </DesktopPricingCta>
             </div>
 
-            <div className="flex w-full flex-col gap-5 rounded-3xl border border-white/8 bg-black p-8 md:w-[641px]">
+            <div
+              className={cn(
+                "w-full flex-col gap-5 rounded-3xl border border-white/8 bg-black p-8 md:w-[641px]",
+                enterpriseOpen ? "flex" : "hidden",
+                "md:flex"
+              )}
+            >
               <p className="type-body font-semibold tracking-[1px] text-white">Enterprise Benefits</p>
               <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                 {enterpriseBenefits.map((item) => (
@@ -224,6 +345,14 @@ export function PricingSection() {
                   </div>
                 ))}
               </div>
+
+              {enterpriseOpen && (
+                <MobileDetailsToggle
+                  dark
+                  detailsOpen
+                  onToggle={() => setEnterpriseOpen(false)}
+                />
+              )}
             </div>
           </div>
         </div>

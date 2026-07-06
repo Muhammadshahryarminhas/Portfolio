@@ -125,15 +125,15 @@ export function ReviewsSection() {
       <div ref={pinRef} className="flex h-screen flex-col justify-center gap-14 overflow-hidden py-14">
         <div
           ref={headerRowRef}
-          className="mx-auto flex w-full max-w-7xl shrink-0 items-center justify-between gap-6 px-4 md:px-8"
+          className="mx-auto flex w-full max-w-7xl shrink-0 flex-col gap-4 px-4 md:flex-row md:items-center md:justify-between md:gap-6 md:px-8"
         >
-          <h2 className="text-2xl font-semibold leading-[1.2] tracking-[-1px] text-black md:text-[32px]">
-            Some words people says about me
+          <h2 className="text-2xl font-semibold uppercase leading-[31.2px] tracking-[-0.72px] text-black md:text-[32px] md:leading-[1.2] md:tracking-[-1px]">
+            SOME WORDS PEOPLE SAYS ABOUT ME
           </h2>
           <BookCallButton
             variant="lime"
             size="pill-lg"
-            className="h-14 shrink-0 whitespace-nowrap"
+            className="h-14 w-full shrink-0 px-4 md:w-auto md:px-6 md:whitespace-nowrap"
           >
             BOOK A 30 MIN FREE STARTEGY CALL
           </BookCallButton>

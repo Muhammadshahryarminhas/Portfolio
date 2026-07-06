@@ -13,7 +13,7 @@ import {
 export function HomePage() {
   return (
     <>
-      <div className="relative z-10 pointer-events-none">
+      <div className="relative z-10 w-full max-w-[100vw] overflow-x-hidden pointer-events-none">
         <div className="pointer-events-auto">
           <HeroSection />
           <SelectedSnapsSection />

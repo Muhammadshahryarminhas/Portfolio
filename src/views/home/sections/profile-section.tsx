@@ -32,20 +32,33 @@ function ExperienceItem({
         type="button"
         onClick={onToggle}
         disabled={!hasDetails}
-        className="flex w-full items-center justify-between gap-4 py-4 pl-4 pr-6 text-left"
+        className="flex w-full flex-col gap-2 py-3.5 pl-4 pr-4 text-left md:flex-row md:items-center md:justify-between md:gap-4 md:py-4 md:pr-6"
       >
-        <span className="flex items-center gap-2.5">
+        <span className="flex min-w-0 items-start gap-2.5 md:items-center">
           <span className="relative size-[42px] shrink-0 overflow-hidden rounded-2xl border-[1.778px] border-white">
             <Image src={item.logo} alt={item.company} fill className="object-cover" />
           </span>
-          <span className="flex flex-col gap-0.5">
-            <span className="text-lg font-medium text-black">{item.company}</span>
+          <span className="flex min-w-0 flex-1 flex-col gap-1 md:gap-0.5">
+            <span className="flex items-start justify-between gap-2 md:block">
+              <span className="text-base font-medium leading-snug text-black md:text-lg">
+                {item.company}
+              </span>
+              {hasDetails && (
+                <ChevronDown
+                  className={cn(
+                    "size-4 shrink-0 text-[#373737] transition-transform duration-300 md:hidden",
+                    open && "rotate-180"
+                  )}
+                />
+              )}
+            </span>
             {item.role && (
-              <span className="text-base text-[#373737]">{item.role}</span>
+              <span className="text-sm leading-snug text-[#373737] md:text-base">{item.role}</span>
             )}
+            <span className="text-sm text-[#373737] md:hidden">{item.period}</span>
           </span>
         </span>
-        <span className="flex items-center gap-2.5">
+        <span className="hidden shrink-0 items-center gap-2.5 md:flex">
           <span className="whitespace-nowrap text-base text-[#373737]">{item.period}</span>
           {hasDetails && (
             <ChevronDown
@@ -66,9 +79,9 @@ function ExperienceItem({
           )}
         >
           <div className="min-h-0 overflow-hidden">
-            <div className="flex flex-col gap-4 pb-4 pl-4 pr-6 text-base text-[#373737]">
+            <div className="flex flex-col gap-3 pb-4 pl-[58px] pr-4 text-sm leading-relaxed text-[#373737] md:gap-4 md:pl-4 md:pr-6 md:text-base">
               {item.points?.length ? (
-                <ul className="list-disc space-y-0 pl-6">
+                <ul className="list-disc space-y-1 pl-4 md:space-y-0 md:pl-6">
                   {item.points.map((point) => (
                     <li key={point} className="leading-[1.4]">
                       {point}
@@ -90,7 +103,7 @@ function StackLogoItem({ logo, index }: { logo: StackLogo; index: number }) {
       className={cn(
         "group relative size-[73px] shrink-0 rounded-full border border-[#f6f6f6] bg-white p-px",
         "transition-transform duration-300 ease-out hover:z-20 hover:-translate-y-3 hover:scale-105",
-        index > 0 && "ml-[-10px]"
+        index > 0 && "md:ml-[-10px]"
       )}
     >
       <div className="flex size-full items-center justify-center">
@@ -136,7 +149,7 @@ export function ProfileSection() {
           <p className="text-2xl font-semibold leading-[31.2px] tracking-[-0.72px] text-black">
             {profile.heading}
           </p>
-          <p className="text-lg leading-[1.4] text-[#373737]">{profile.intro}</p>
+          <p className="text-md leading-[1.4] text-[#373737]">{profile.intro}</p>
 
           <div className="flex flex-col items-center gap-2 py-4">
             {experiences.slice(0, DEFAULT_VISIBLE).map((item, index) => (
@@ -180,7 +193,7 @@ export function ProfileSection() {
                 }}
                 className="mt-2 h-14 gap-3 rounded-full border-[#dcdcdc] bg-white pl-4 pr-3 text-black shadow-[inset_0px_-3px_4px_0px_rgba(0,0,0,0.07),inset_0px_3px_6.6px_0px_rgba(255,255,255,0.25)] hover:bg-white"
               >
-                {expanded ? "View Less" : "Show More"}
+                {expanded ? "VIEW LESS" : "SHOW MORE"}
                 <ChevronDown
                   className={cn("size-4 transition-transform duration-300", expanded && "rotate-180")}
                 />
@@ -192,7 +205,7 @@ export function ProfileSection() {
             <p className="text-2xl font-semibold leading-[31.2px] tracking-[-0.72px] text-black">
               My Tech Stack
             </p>
-            <div className="flex items-center">
+            <div className="grid grid-cols-4 gap-2 md:flex md:items-center">
               {techStack.map((logo, index) => (
                 <StackLogoItem key={logo.alt} logo={logo} index={index} />
               ))}

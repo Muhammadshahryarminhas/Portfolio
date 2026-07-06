@@ -12,24 +12,27 @@ import {
 
 export const FOOTER_REVEAL_HEIGHT = "100svh";
 
+const pillLinkClassName =
+  "select-none rounded-full bg-white font-semibold tracking-[-0.02em] text-black shadow-[0_8px_32px_rgba(0,0,0,0.35)]";
+
 function FooterTicker() {
   const phrase = footerCopy.ticker;
 
   return (
-    <div className="relative overflow-hidden pt-10 pb-6 md:pt-16 md:pb-10">
-      <div className="flex w-max animate-footer-ticker items-center gap-6 md:gap-10">
+    <div className="relative w-full max-w-full shrink-0 overflow-hidden pt-8 pb-4 sm:pt-10 sm:pb-6 md:pt-16 md:pb-10">
+      <div className="flex w-max max-w-none animate-footer-ticker items-center gap-4 sm:gap-6 md:gap-10">
         {[0, 1].map((set) => (
           <div
             key={set}
-            className="flex items-center gap-6 md:gap-10"
+            className="flex items-center gap-4 sm:gap-6 md:gap-10"
             aria-hidden={set === 1}
           >
             {Array.from({ length: 3 }).map((_, i) => (
-              <div key={`${set}-${i}`} className="flex items-center gap-6 md:gap-10">
-                <span className="whitespace-nowrap text-[clamp(3.5rem,14vw,12rem)] font-semibold tracking-[-0.02em] text-white">
+              <div key={`${set}-${i}`} className="flex items-center gap-4 sm:gap-6 md:gap-10">
+                <span className="whitespace-nowrap text-[clamp(2rem,10vw,12rem)] font-semibold tracking-[-0.02em] text-white">
                   {phrase}
                 </span>
-                <span className="size-10 shrink-0 rounded-full bg-lime md:size-16" />
+                <span className="size-7 shrink-0 rounded-full bg-lime sm:size-10 md:size-16" />
               </div>
             ))}
           </div>
@@ -108,7 +111,7 @@ function FooterPills({ className }: { className?: string }) {
   return (
     <div
       ref={areaRef}
-      className={cn("relative touch-none", className)}
+      className={cn("relative touch-none overflow-hidden", className)}
     >
       {footerSocialLinks.map((link, index) => (
         <a
@@ -121,9 +124,9 @@ function FooterPills({ className }: { className?: string }) {
           rel="noopener noreferrer"
           className={cn(
             "footer-pill absolute top-0 left-0 cursor-grab active:cursor-grabbing",
-            "select-none rounded-full bg-white px-8 py-4 md:px-12 md:py-6 lg:px-14 lg:py-7",
-            "text-3xl font-semibold tracking-[-0.02em] text-black md:text-5xl lg:text-6xl xl:text-7xl",
-            "shadow-[0_8px_32px_rgba(0,0,0,0.35)] will-change-transform"
+            pillLinkClassName,
+            "px-4 py-2 text-lg sm:px-6 sm:py-3 sm:text-2xl md:px-12 md:py-6 md:text-5xl lg:px-14 lg:py-7 lg:text-6xl xl:text-7xl",
+            "will-change-transform"
           )}
         >
           {link.label}
@@ -136,29 +139,29 @@ function FooterPills({ className }: { className?: string }) {
 export function FooterSection() {
   return (
     <footer
-      className="pointer-events-auto fixed inset-x-0 bottom-0 z-[1] flex h-svh min-h-[720px] flex-col overflow-hidden bg-black"
+      className="pointer-events-auto fixed right-0 bottom-0 left-0 z-[1] flex h-svh w-full max-w-[100vw] flex-col overflow-hidden bg-black"
       aria-label="Footer"
     >
       <FooterTicker />
 
-      <div className="section-container relative flex flex-1 flex-col">
-        <div className="h-px w-full bg-white/15" />
+      <div className="relative flex min-h-0 w-full flex-1 flex-col overflow-hidden px-4 md:mx-auto md:max-w-7xl md:px-8">
+        <div className="h-px w-full shrink-0 bg-white/15" />
 
-        <div className="relative flex min-h-0 flex-1 flex-col py-8 md:py-12">
-          <div className="relative z-20 shrink-0 grid gap-6 text-base leading-snug text-white md:grid-cols-3 md:gap-10 md:text-lg">
-            <p className="max-w-md leading-snug">{footerCopy.tagline}</p>
+        <div className="relative flex min-h-0 w-full flex-1 flex-col overflow-hidden py-6 sm:py-8 md:py-12">
+          <div className="relative z-20 grid w-full shrink-0 gap-4 text-center text-sm leading-snug text-white sm:gap-5 sm:text-base md:grid-cols-3 md:gap-10 md:text-left md:text-lg">
+            <p className="text-2xl leading-snug mx-auto max-w-md md:mx-0">{footerCopy.tagline}</p>
             <a
               href={`mailto:${footerCopy.email}`}
-              className="relative z-30 underline underline-offset-4 transition-opacity hover:opacity-80 md:text-center"
+              className="relative z-30 text-2xl underline underline-offset-4 transition-opacity hover:opacity-80 md:text-center"
             >
               {footerCopy.cta}
             </a>
-            <p className="md:text-right">{footerCopy.credit}</p>
+            <p className="text-2xl md:text-right">{footerCopy.credit}</p>
           </div>
 
-          <div className="relative mt-8 min-h-0 flex-1 md:mt-10">
+          <div className="relative mt-6 flex min-h-[200px] w-full flex-1 flex-col justify-end overflow-hidden sm:min-h-[240px] md:mt-10 md:min-h-0">
             <p
-              className="pointer-events-none absolute inset-x-0 bottom-0 z-0 text-center text-[clamp(3rem,18vw,8rem)] font-semibold tracking-[-0.02em] whitespace-nowrap text-white/30"
+              className="pointer-events-none absolute inset-x-0 bottom-0 z-0 overflow-hidden px-4 text-center text-[clamp(1.5rem,8vw,8rem)] font-semibold tracking-[-0.02em] text-ellipsis text-white/30 md:px-0 md:whitespace-nowrap"
               aria-hidden
             >
               {footerCopy.email}

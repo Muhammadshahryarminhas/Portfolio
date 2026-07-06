@@ -141,8 +141,8 @@ export function FaqSection() {
   return (
     <section id="faq" className="bg-white px-4 py-40 md:px-8">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8">
-        <h2 className="type-h2">
-          Questions? Just ask.
+        <h2 className="text-2xl font-semibold uppercase leading-[31.2px] tracking-[-0.72px] text-black md:text-[32px] md:leading-[1.2] md:tracking-[-1px]">
+          QUESTIONS? JUST ASK.
         </h2>
 
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
@@ -184,7 +184,7 @@ export function FaqSection() {
                     key={q}
                     type="button"
                     onClick={() => respond(q)}
-                    className="type-caption rounded-full border border-[#ececec] bg-[#fafafa] px-3.5 py-1.5 transition-colors hover:border-[#1f85ff] hover:text-black"
+                    className="type-caption rounded-full border border-[#ececec] bg-[#fafafa] px-3.5 py-1.5 text-left transition-colors hover:border-[#1f85ff] hover:text-black"
                   >
                     {q}
                   </button>
@@ -203,14 +203,14 @@ export function FaqSection() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask a question..."
                 disabled={typing}
-                className="type-body h-11 flex-1 rounded-full border border-[#ececec] bg-[#fafafa] px-4 text-black outline-none placeholder:text-[#999] focus:border-[#1f85ff] disabled:opacity-50"
+                className="type-body h-14 flex-1 rounded-full border border-[#ececec] bg-[#fafafa] px-4 text-black outline-none placeholder:text-[#999] focus:border-[#1f85ff] disabled:opacity-50 md:h-11"
               />
               <Button
                 type="submit"
                 variant="hero-dark"
                 size="icon"
                 disabled={!input.trim() || typing}
-                className="size-11 shrink-0 rounded-full"
+                className="size-14 shrink-0 rounded-full md:size-11"
               >
                 <Send className="size-4" />
               </Button>

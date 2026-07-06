@@ -42,7 +42,7 @@ const buttonVariants = cva(
           "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
         "icon-lg": "size-9",
         pill: "h-9 rounded-full px-5 text-base font-semibold",
-        "pill-lg": "h-11 rounded-full px-6 text-base font-semibold",
+        "pill-lg": "h-11 rounded-full px-6 text-base font-semibold uppercase",
       },
     },
     defaultVariants: {

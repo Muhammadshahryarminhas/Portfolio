@@ -72,6 +72,7 @@
   --animate-marquee-left: marquee-left 80s linear infinite;
   --animate-marquee-right: marquee-right 80s linear infinite;
   --animate-footer-ticker: marquee-left 45s linear infinite;
+  --animate-brand-ticker: marquee-left 35s linear infinite;
 }
 
 :root {

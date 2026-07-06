@@ -21,18 +21,18 @@ export function HeroSection() {
 
       <Navbar />
 
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 py-24 text-center md:px-8 md:py-32">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-6">
-          <p className="text-lg font-normal text-neutral-800 md:text-xl">
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 pt-28 pb-16 text-center sm:pt-32 md:px-8 md:py-32">
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 sm:gap-5 md:gap-6">
+          <p className="text-base font-normal text-neutral-800 sm:text-lg md:text-xl">
             👋 Hey, I&apos;m <span className="font-semibold">{siteConfig.shortName}</span>
           </p>
 
-          <h1 className="text-3xl font-semibold leading-tight tracking-tight text-neutral-900 md:text-5xl lg:text-[3.25rem] lg:leading-[1.15]">
+          <h1 className="text-2xl font-semibold leading-tight tracking-tight text-neutral-900 sm:text-3xl md:text-5xl lg:text-[3.25rem] lg:leading-[1.15]">
             Tired of generic AI designs? Let&apos;s elevate your MVP to a sleek,
             investor-ready solution.
           </h1>
 
-          <p className="text-xl leading-relaxed text-[#373737]">
+          <p className="max-w-2xl text-base leading-relaxed text-[#373737] sm:text-lg md:text-xl">
             Transform your AI-powered designs into a polished product that demonstrates
             your execution skills, helping you secure funding and launch confidently.
           </p>
@@ -42,32 +42,32 @@ export function HeroSection() {
               <Badge
                 key={feature}
                 variant="outline"
-                className="gap-1.5 rounded-md border-[#F2F2F2] bg-white/50 px-4 text-md font-medium text-[#373737] py-6"
+                className="gap-1 rounded-md border-[#F2F2F2] bg-white/50 px-3 py-3 text-sm font-medium text-[#373737] sm:gap-1.5 sm:px-4 sm:py-4 sm:text-md md:py-6"
               >
                 <Image
                   src={assets.tick}
                   alt=""
                   width={18}
                   height={18}
-                  className="shrink-0"
+                  className="size-4 shrink-0 sm:size-[18px]"
                 />
                 {feature}
               </Badge>
             ))}
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+          <div className="flex w-full max-w-sm flex-col items-stretch gap-2.5 pt-2 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-3">
             <BookCallButton variant="hero-dark" size="pill-lg" className="h-14">
-              Let&apos;s Start Project Discussion
+              LET&apos;S START PROJECT DISCUSSION
             </BookCallButton>
             <Button render={<a href="#projects" />} variant="lime" size="pill-lg" className="h-14">
-              View Projects
+              VIEW PROJECTS
             </Button>
           </div>
         </div>
       </div>
 
-      <div className="relative z-10 w-full pb-8 md:pb-12">
+      <div className="relative z-10 w-full max-w-full overflow-hidden pb-8 md:pb-12">
         <HeroSocialProof />
       </div>
     </section>

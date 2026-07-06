@@ -48,15 +48,35 @@ function BrandLogo({ gray, color, alt, tooltip, width, height, scale }: BrandLog
   );
 }
 
+function BrandTicker() {
+  return (
+    <div className="w-full overflow-hidden">
+      <div className="flex w-max animate-brand-ticker items-center gap-8">
+        {[0, 1].map((set) => (
+          <div
+            key={set}
+            className="flex items-center gap-8"
+            aria-hidden={set === 1}
+          >
+            {assets.brands.map((brand) => (
+              <BrandLogo key={`${set}-${brand.alt}`} {...brand} />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function HeroSocialProof() {
   return (
-    <div className="section-container flex flex-row items-center justify-between">
-      <div className="flex shrink-0 items-center gap-3">
+    <div className="section-container flex flex-col items-center gap-5 md:flex-row md:items-center md:justify-between md:gap-0">
+      <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
         <div className="flex items-center">
           {assets.clientLogos.map((src, i) => (
             <div
               key={src}
-              className={`relative size-12 overflow-hidden rounded-full border border-white bg-white ${i > 0 ? "-ml-3.5" : ""}`}
+              className={`relative size-9 overflow-hidden rounded-full border border-white bg-white sm:size-12 ${i > 0 ? "-ml-2.5 sm:-ml-3.5" : ""}`}
             >
               <Image src={src} alt="" fill className="object-cover" sizes="48px" />
             </div>
@@ -66,21 +86,25 @@ export function HeroSocialProof() {
         <div className="flex flex-col gap-0.5">
           <div className="flex items-center gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="size-3.5 fill-amber-400 text-amber-400" />
+              <Star key={i} className="size-3 fill-amber-400 text-amber-400 sm:size-3.5" />
             ))}
           </div>
-          <p className="whitespace-nowrap text-md text-[#373737]">Trusted by 20+ brands</p>
+          <p className="whitespace-nowrap text-sm text-[#373737] sm:text-md">
+            Trusted by 20+ brands
+          </p>
         </div>
       </div>
 
       <div className="hidden h-12 w-px shrink-0 bg-neutral-200 md:block" />
 
-      <div className="flex w-full items-center justify-center overflow-x-auto md:w-auto md:overflow-visible">
-        <div className="flex items-center gap-8 px-1">
-          {assets.brands.map((brand) => (
-            <BrandLogo key={brand.alt} {...brand} />
-          ))}
-        </div>
+      <div className="w-full max-w-full overflow-hidden md:hidden">
+        <BrandTicker />
+      </div>
+
+      <div className="hidden items-center justify-center gap-8 md:flex">
+        {assets.brands.map((brand) => (
+          <BrandLogo key={brand.alt} {...brand} />
+        ))}
       </div>
     </div>
   );

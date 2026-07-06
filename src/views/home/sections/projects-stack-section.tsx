@@ -9,6 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BookCallButton } from "@/components/book-call-button";
 import { Button } from "@/components/ui/button";
 import { projects } from "@/config/projects";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
 
 const MAX_CARD_HEIGHT = 797;
@@ -20,23 +21,117 @@ const FOLLOW_STEP = 0.5;
 const SCROLL_PER_CARD = 0.65;
 const RELEASE_SCROLL = 0.2;
 
+function ProjectsHeader() {
+  return (
+    <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-6">
+      <h2 className="text-2xl font-semibold uppercase leading-[31.2px] tracking-[-0.72px] text-black md:leading-[1.2] md:tracking-[-1px]">
+        <span className="md:hidden">
+          PROJECTS THAT HELPED TEAMS LAUNCH, GROW, AND SHIP FASTER.
+        </span>
+        <span className="hidden md:inline">
+          PROJECTS THAT HELPED TEAMS
+          <br />
+          LAUNCH, GROW, AND SHIP FASTER.
+        </span>
+      </h2>
+      <BookCallButton
+        variant="lime"
+        size="pill-lg"
+        className="h-14 w-full shrink-0 px-4 md:w-auto md:px-6 md:whitespace-nowrap"
+      >
+        BOOK A 30 MIN FREE STARTEGY CALL
+      </BookCallButton>
+    </div>
+  );
+}
+
+function ProjectCardMobile({ project }: { project: (typeof projects)[number] }) {
+  return (
+    <div className="relative min-h-[460px] w-full overflow-hidden rounded-2xl shadow-[0_-12px_50px_rgba(0,0,0,0.08)] sm:min-h-[500px]">
+      <Image
+        src="/images/projects/card-bg.png"
+        alt=""
+        fill
+        className="object-cover"
+        sizes="(max-width: 768px) 100vw, 1024px"
+      />
+
+      <div className="relative z-10 p-4 pb-56 sm:pb-64">
+        <div className="w-full rounded-2xl bg-white/20 p-4">
+          <div className="flex flex-col gap-3">
+            <div className="relative h-10 w-[130px]">
+              <Image
+                src={project.logo}
+                alt=""
+                fill
+                className="object-contain object-left"
+              />
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <h3 className="text-xl font-semibold leading-[1.25] tracking-[-0.5px] text-white">
+                {project.title}
+              </h3>
+
+              <div className="h-px w-full bg-white/20" />
+
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-white/12 px-3 py-1.5 text-xs text-white"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <p className="text-sm leading-relaxed text-white">
+                {project.description}
+              </p>
+
+              <Button
+                render={<Link href={project.href} />}
+                variant="lime"
+                size="pill-lg"
+                className="h-14 w-fit gap-2 rounded-full py-2 pr-4 pl-2"
+              >
+                <span className="flex size-10 items-center justify-center rounded-full bg-white">
+                  <Briefcase className="size-4 text-black" />
+                </span>
+                <span className="font-semibold">VIEW CASE STUDY</span>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="pointer-events-none absolute -right-2 bottom-0 z-10 h-[300px] w-[280px] sm:h-[340px] sm:w-[320px]">
+        <Image
+          src={project.mockup}
+          alt=""
+          fill
+          className="object-contain object-right-bottom"
+          sizes="(max-width: 768px) 280px, 320px"
+        />
+      </div>
+    </div>
+  );
+}
+
 function ProjectCard({
   project,
   height,
 }: {
   project: (typeof projects)[number];
-  height: number;
+  height?: number;
 }) {
   return (
     <div
       className="relative w-full origin-top will-change-transform"
-      style={{ height }}
+      style={height ? { height } : undefined}
     >
-      <div
-        className={cn(
-          "relative h-full overflow-hidden rounded-2xl px-12 pt-12 pb-0 shadow-[0_-12px_50px_rgba(0,0,0,0.08)]"
-        )}
-      >
+      <div className="relative h-full overflow-hidden rounded-2xl px-12 pt-12 pb-0 shadow-[0_-12px_50px_rgba(0,0,0,0.08)]">
         <Image
           src="/images/projects/card-bg.png"
           alt=""
@@ -47,9 +142,7 @@ function ProjectCard({
         />
 
         <div className="relative z-10 h-full">
-          <div
-            className="max-w-[750px] rounded-[32px] bg-white/20 p-12"
-          >
+          <div className="max-w-[750px] rounded-[32px] bg-white/20 p-12">
             <div className="flex flex-col gap-8">
               <div className={cn("relative overflow-hidden", project.logoClassName)}>
                 <Image
@@ -95,12 +188,12 @@ function ProjectCard({
                   render={<Link href={project.href} />}
                   variant="lime"
                   size="pill-lg"
-                  className="h-auto gap-2 w-fit rounded-full pl-2 pr-5 py-2"
+                  className="h-auto w-fit gap-2 rounded-full py-2 pr-5 pl-2"
                 >
                   <span className="flex size-12 items-center justify-center rounded-full bg-white">
                     <Briefcase className="size-5 text-black" />
                   </span>
-                  View Case Study
+                  VIEW CASE STUDY
                 </Button>
               </div>
             </div>
@@ -108,7 +201,7 @@ function ProjectCard({
 
           <div
             className={cn(
-              "pointer-events-none absolute bottom-0 right-0 hidden md:block",
+              "pointer-events-none absolute bottom-0 right-0",
               project.mockupClassName
             )}
           >
@@ -120,15 +213,31 @@ function ProjectCard({
   );
 }
 
-export function ProjectsStackSection() {
-  const sectionRef = useRef<HTMLElement>(null);
+function ProjectsMobileList() {
+  return (
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-4 pb-16 pt-20 md:hidden">
+      <ProjectsHeader />
+      <div className="flex flex-col gap-5">
+        {projects.map((project) => (
+          <ProjectCardMobile key={project.id} project={project} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ProjectsDesktopStack() {
+  const sectionRef = useRef<HTMLDivElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
   const [cardHeight, setCardHeight] = useState(MAX_CARD_HEIGHT);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   useLayoutEffect(() => {
+    if (!isDesktop) return;
+
     const peekOffset = STACK_PEEK * (projects.length - 1);
 
     const measure = () => {
@@ -155,9 +264,11 @@ export function ProjectsStackSection() {
       ro.disconnect();
       window.removeEventListener("resize", measure);
     };
-  }, []);
+  }, [isDesktop]);
 
   useEffect(() => {
+    if (!isDesktop) return;
+
     gsap.registerPlugin(ScrollTrigger);
 
     const section = sectionRef.current;
@@ -236,32 +347,21 @@ export function ProjectsStackSection() {
     }, section);
 
     return () => ctx.revert();
-  }, [cardHeight]);
+  }, [cardHeight, isDesktop]);
 
   return (
-    <section ref={sectionRef} id="projects" className="bg-[#ffffff] pb-20 md:pb-32">
+    <div ref={sectionRef} className="hidden pb-32 md:block">
       <div ref={pinRef} className="flex h-screen flex-col overflow-hidden">
         <div
           ref={headerRef}
-          className="mx-auto flex w-full max-w-7xl shrink-0 flex-row items-center justify-between gap-6 pb-8 pt-36"
+          className="mx-auto flex w-full max-w-7xl shrink-0 px-8 pb-8 pt-36"
         >
-          <h2 className="text-2xl font-semibold leading-[1.2] tracking-[-1px] text-black">
-            PROJECTS THAT HELPED TEAMS
-            <br />
-            LAUNCH, GROW, AND SHIP FASTER.
-          </h2>
-          <BookCallButton
-            variant="lime"
-            size="pill-lg"
-            className="h-14 shrink-0 whitespace-nowrap"
-          >
-            BOOK A 30 MIN FREE STARTEGY CALL
-          </BookCallButton>
+          <ProjectsHeader />
         </div>
 
         <div
           ref={stageRef}
-          className="relative mx-auto min-h-0 w-full max-w-7xl flex-1"
+          className="relative mx-auto min-h-0 w-full max-w-7xl flex-1 px-8"
         >
           {projects.map((project, index) => (
             <div
@@ -275,6 +375,15 @@ export function ProjectsStackSection() {
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+export function ProjectsStackSection() {
+  return (
+    <section id="projects" className="bg-[#ffffff]">
+      <ProjectsMobileList />
+      <ProjectsDesktopStack />
     </section>
   );
 }
