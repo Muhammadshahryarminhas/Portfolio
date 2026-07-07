@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Anek_Latin } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CalEmbedProvider } from "@/components/cal-embed-provider";
 import { siteConfig } from "@/config/site";
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body className="min-h-full overflow-x-hidden font-sans">
         <CalEmbedProvider>
           {children}
+          <Analytics />
           <SpeedInsights />
         </CalEmbedProvider>
       </body>
