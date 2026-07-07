@@ -27,7 +27,7 @@ async function generateMotivation(dateKey: string) {
 
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-3.1-flash-lite" });
     const result = await model.generateContent(
       `Today is ${dateKey}. Write ONE short witty motivational quote (max 100 characters) for a designer's portfolio 404 page. Be playful and creative. Return ONLY the quote text, no author or explanation.`
     );

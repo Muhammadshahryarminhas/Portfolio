@@ -1,6 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { chatSystemPrompt } from "@/config/knowledge";
-import { faqFallbackAnswer } from "@/config/faq";
+import { chatSystemPrompt, faqFallbackAnswer } from "@/config/chat";
 
 const MAX_MESSAGE_LENGTH = 500;
 const MAX_HISTORY = 10;
@@ -37,7 +36,7 @@ export async function POST(req: Request) {
 
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({
-      model: "gemini-2.5-flash",
+      model: "gemini-3.1-flash-lite",
       systemInstruction: chatSystemPrompt,
     });
 

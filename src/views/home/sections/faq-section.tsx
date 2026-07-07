@@ -8,7 +8,7 @@ import { assets } from "@/config/assets";
 import {
   faqFallbackAnswer,
   faqSuggestions,
-} from "@/config/faq";
+} from "@/config/chat";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
