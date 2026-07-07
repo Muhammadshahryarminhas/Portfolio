@@ -81,9 +81,13 @@ export default function Home() {
 
       {isLoading && (
         <div
-          className="pointer-events-none fixed inset-0 z-9999 bg-white transition-transform duration-500 ease-out"
-          style={exiting ? { transform: "translateY(48px)" } : { transform: "translateY(0px)" }}
-        >
+        className="pointer-events-none fixed inset-0 z-9999 bg-white transition-[transform,opacity] duration-1000 ease-out"
+        style={
+          exiting
+            ? { transform: "translateY(1400px)", opacity: 0 }
+            : { transform: "translateY(0px)", opacity: 1 }
+        }
+      >
           <div className="absolute right-6 top-6 select-none text-[72px] font-semibold leading-none tracking-[-0.04em] text-black md:right-10 md:top-10 md:text-[96px]">
             {progress}%
           </div>
