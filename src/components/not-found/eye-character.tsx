@@ -8,7 +8,8 @@ const PUPIL_MAX = 55;
 
 function useEyeBlink(
   eyeRef: React.RefObject<HTMLDivElement | null>,
-  pupilRef: React.RefObject<HTMLDivElement | null>
+  pupilRef: React.RefObject<HTMLDivElement | null>,
+  repeatDelay = 2.94
 ) {
   useEffect(() => {
     const eye = eyeRef.current;
@@ -17,7 +18,7 @@ function useEyeBlink(
 
     gsap.set([eye, pupil], { transformOrigin: "center center" });
 
-    const blink = gsap.timeline({ repeat: -1, repeatDelay: 2.94 });
+    const blink = gsap.timeline({ repeat: -1, repeatDelay });
     blink
       .to([eye, pupil], { scaleY: 0.238, duration: 0.04, ease: "none" })
       .to([eye, pupil], { scaleY: 0.05, duration: 0.02, ease: "none" })
@@ -26,7 +27,7 @@ function useEyeBlink(
     return () => {
       blink.kill();
     };
-  }, [eyeRef, pupilRef]);
+  }, [eyeRef, pupilRef, repeatDelay]);
 }
 
 function useEyePairTracking(
@@ -89,6 +90,7 @@ function Eye({
   pupilSrc,
   className,
   pupilClassName,
+  blinkRepeatDelay,
 }: {
   eyeRef: React.RefObject<HTMLDivElement | null>;
   pupilRef: React.RefObject<HTMLDivElement | null>;
@@ -96,8 +98,9 @@ function Eye({
   pupilSrc: string;
   className?: string;
   pupilClassName?: string;
+  blinkRepeatDelay?: number;
 }) {
-  useEyeBlink(eyeRef, pupilRef);
+  useEyeBlink(eyeRef, pupilRef, blinkRepeatDelay);
 
   return (
     <div className={className}>
@@ -118,10 +121,12 @@ function EyePair({
   leftClassName,
   rightClassName,
   pupilClassName,
+  blinkRepeatDelay,
 }: {
   leftClassName?: string;
   rightClassName?: string;
   pupilClassName?: string;
+  blinkRepeatDelay?: number;
 }) {
   const leftEyeRef = useRef<HTMLDivElement>(null);
   const leftPupilRef = useRef<HTMLDivElement>(null);
@@ -139,6 +144,7 @@ function EyePair({
         pupilSrc="/images/404/pupil-left.svg"
         className={leftClassName}
         pupilClassName={pupilClassName}
+        blinkRepeatDelay={blinkRepeatDelay}
       />
       <Eye
         eyeRef={rightEyeRef}
@@ -147,8 +153,30 @@ function EyePair({
         pupilSrc="/images/404/pupil-right.svg"
         className={rightClassName}
         pupilClassName={pupilClassName}
+        blinkRepeatDelay={blinkRepeatDelay}
       />
     </>
+  );
+}
+
+export function EyeLoader() {
+  return (
+    <div className="relative aspect-[822/624] w-[min(920px,92vw)]">
+      <Image
+        src="/images/404/dome.svg"
+        alt=""
+        fill
+        className="object-contain"
+        priority
+        sizes="(max-width: 768px) 92vw, 920px"
+      />
+
+      <EyePair
+        leftClassName="absolute top-[9%] left-[40.9%] h-[20.6%] w-[11.4%] -translate-x-1/2"
+        rightClassName="absolute top-[9%] left-[59%] h-[20.6%] w-[11.4%] -translate-x-1/2"
+        blinkRepeatDelay={0.93}
+      />
+    </div>
   );
 }
 

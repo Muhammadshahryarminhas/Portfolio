@@ -26,8 +26,8 @@ export const projects = [
   },
   {
     id: "squadron",
-    logo: "/images/projects/slide-3-logo.png",
-    logoClassName: "h-[74px] w-[144px]",
+    logo: "/images/projects/slide3-logo.png",
+    logoClassName: "h-[110px] w-[206px]",
     title: "Reduced Administrative Workload by 40%",
     titleClassName: "tracking-[-2.2px] leading-[52px]",
     tags: ["NGO", "Web Based Dashboard"],
