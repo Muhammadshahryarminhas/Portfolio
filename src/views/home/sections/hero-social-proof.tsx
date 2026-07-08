@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Star } from "lucide-react";
 import { assets } from "@/config/assets";
 
@@ -17,9 +19,53 @@ type BrandLogoProps = {
 function BrandLogo({ gray, color, alt, tooltip, width, height, scale }: BrandLogoProps) {
   const displayWidth = Math.round(width * scale);
   const displayHeight = Math.round(height * scale);
+  const triggerRef = useRef<HTMLDivElement>(null);
+  const tooltipId = useId();
+  const [open, setOpen] = useState(false);
+  const [pos, setPos] = useState({ top: 0, left: 0 });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const updatePos = useCallback(() => {
+    const el = triggerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    setPos({
+      top: rect.top - 8,
+      left: rect.left + rect.width / 2,
+    });
+  }, []);
+
+  const show = () => {
+    updatePos();
+    setOpen(true);
+  };
+
+  const hide = () => setOpen(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const onScroll = () => updatePos();
+    window.addEventListener("scroll", onScroll, true);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll, true);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [open, updatePos]);
 
   return (
-    <div className="group relative shrink-0">
+    <div
+      ref={triggerRef}
+      className="group relative shrink-0"
+      onMouseEnter={show}
+      onMouseLeave={hide}
+      onFocus={show}
+      onBlur={hide}
+    >
       <div className="relative" style={{ width: displayWidth, height: displayHeight }}>
         <Image
           src={gray}
@@ -37,13 +83,20 @@ function BrandLogo({ gray, color, alt, tooltip, width, height, scale }: BrandLog
         />
       </div>
 
-      <div
-        role="tooltip"
-        className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-max max-w-[220px] -translate-x-1/2 rounded-lg bg-neutral-900 px-3 py-2 text-center text-md leading-snug text-white opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100"
-      >
-        {tooltip}
-        <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-neutral-900" />
-      </div>
+      {mounted &&
+        open &&
+        createPortal(
+          <div
+            id={tooltipId}
+            role="tooltip"
+            className="pointer-events-none fixed z-9999 w-max max-w-[220px] -translate-x-1/2 -translate-y-full rounded-lg bg-neutral-900 px-3 py-2 text-center text-md leading-snug text-white shadow-lg"
+            style={{ top: pos.top, left: pos.left }}
+          >
+            {tooltip}
+            <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-neutral-900" />
+          </div>,
+          document.body
+        )}
     </div>
   );
 }

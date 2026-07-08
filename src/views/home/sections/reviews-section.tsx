@@ -125,7 +125,7 @@ export function ReviewsSection() {
       <div ref={pinRef} className="flex h-screen flex-col justify-center gap-14 overflow-hidden py-14">
         <div
           ref={headerRowRef}
-          className="mx-auto flex w-full max-w-7xl shrink-0 flex-col gap-4 px-4 md:flex-row md:items-center md:justify-between md:gap-6 md:px-8"
+          className="mx-auto flex w-full max-w-7xl shrink-0 flex-col gap-4 px-4 md:px-0 md:flex-row md:items-center md:justify-between md:gap-6"
         >
           <h2 className="text-2xl font-semibold uppercase leading-[31.2px] tracking-[-0.72px] text-black md:text-[32px] md:leading-[1.2] md:tracking-[-1px]">
             SOME WORDS PEOPLE SAYS ABOUT ME

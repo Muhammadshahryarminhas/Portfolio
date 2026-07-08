@@ -1,5 +1,5 @@
 export const assets = {
-  avatar: "/images/My avatar.png",
+  avatar: "/images/projects/profile.jpg",
   tick: "/images/SealCheck.png",
   menuIcon: "/images/DotsThreeOutline.svg",
   clientLogos: [

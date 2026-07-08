@@ -23,7 +23,7 @@ const RELEASE_SCROLL = 0.2;
 
 function ProjectsHeader() {
   return (
-    <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-6">
+    <div className="flex flex-col w-full gap-4 md:flex-row md:items-center md:justify-between md:gap-6">
       <h2 className="text-2xl font-semibold uppercase leading-[31.2px] tracking-[-0.72px] text-black md:leading-[1.2] md:tracking-[-1px]">
         <span className="md:hidden">
           PROJECTS THAT HELPED TEAMS LAUNCH, GROW, AND SHIP FASTER.
@@ -354,7 +354,7 @@ function ProjectsDesktopStack() {
       <div ref={pinRef} className="flex h-screen flex-col overflow-hidden">
         <div
           ref={headerRef}
-          className="mx-auto flex w-full max-w-7xl shrink-0 px-8 pb-8 pt-36"
+          className="mx-auto flex w-full max-w-7xl shrink-0 px-8 md:px-0 pb-8 pt-36"
         >
           <ProjectsHeader />
         </div>

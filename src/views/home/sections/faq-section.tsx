@@ -230,7 +230,7 @@ export function FaqSection() {
                 />
               </span>
 
-              <h3 className="type-h3 text-[#373737]">
+              <h3 className="text-2xl font-semibold leading-[31.2px] tracking-[-0.72px] text-[#373737] md:leading-[1.2] md:tracking-[-1px]">
                 Looking for a{" "}
                 <span className="text-[#ff6b4a]">strategic addition</span> to your creative
                 team?
