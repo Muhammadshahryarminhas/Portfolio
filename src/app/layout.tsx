@@ -27,8 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${anekLatin.variable} h-full overflow-x-hidden antialiased`}>
-      <body className="min-h-full overflow-x-hidden font-sans">
+    <html lang="en" className={`${anekLatin.variable} h-full overflow-x-clip antialiased`}>
+      <body className="min-h-full overflow-x-clip font-sans">
         <CalEmbedProvider>
           {children}
           <BackgroundAudio />

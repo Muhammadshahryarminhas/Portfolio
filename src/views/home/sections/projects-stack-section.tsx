@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Lock } from "lucide-react";
+import { ArrowRight, Lock } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BookCallButton } from "@/components/book-call-button";
@@ -97,7 +97,11 @@ function ProjectCardMobile({ project }: { project: (typeof projects)[number] }) 
                 className="h-14 w-fit gap-2 rounded-full py-2 pr-4 pl-2"
               >
                 <span className="flex size-10 items-center justify-center rounded-full bg-white">
-                  <Lock className="size-4 text-black" />
+                  {"locked" in project && project.locked ? (
+                    <Lock className="size-4 text-black" />
+                  ) : (
+                    <ArrowRight className="size-4 text-black" />
+                  )}
                 </span>
                 <span className="font-semibold">VIEW CASE STUDY</span>
               </Button>
@@ -191,7 +195,11 @@ function ProjectCard({
                   className="h-auto w-fit gap-2 rounded-full py-2 pr-5 pl-2"
                 >
                   <span className="flex size-12 items-center justify-center rounded-full bg-white">
-                    <Lock className="size-5 text-black" />
+                    {"locked" in project && project.locked ? (
+                      <Lock className="size-5 text-black" />
+                    ) : (
+                      <ArrowRight className="size-5 text-black" />
+                    )}
                   </span>
                   VIEW CASE STUDY
                 </Button>

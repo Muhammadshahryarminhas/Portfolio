@@ -1,15 +1,16 @@
 export const projects = [
   {
-    id: "private-jet",
-    logo: "/images/projects/slide-1-logo.png",
-    logoClassName: "h-[60px] w-[117px]",
-    title: "Helping Private Jet Operators Save Up to $300K Annually",
-    tags: ["Airlines", "iOS & Android"],
+    id: "brandpulse",
+    logo: "/images/projects/brandpulse-logo.png",
+    logoClassName: "h-12 w-[178px]",
+    title: "Designing an AI Platform to Validate Ad Creatives Before Media Spend",
+    tags: ["SaaS", "AI", "Web App", "Creative Testing"],
     description:
-      "A mobile application that enables pilots to accurately record meter readings before and after every flight, eliminating manual errors, preventing unnecessary flight-time discrepancies, and giving airlines complete visibility into aircraft utilization.",
-    mockup: "/images/projects/mockup-3.png",
+      "BrandPulse helps advertisers validate images, videos, text, and HTML5 banners with real audiences before launching campaigns — so marketers get data-backed insights instead of spending on assumptions.",
+    mockup: "/images/projects/brandpulse-mockup.png",
     mockupClassName: "md:-bottom-14 md:-right-[185px] h-[601px] w-[665px]",
-    href: "#projects",
+    href: "/work/brandpulse",
+    locked: false,
   },
   {
     id: "palm-beaches",
@@ -23,6 +24,7 @@ export const projects = [
     mockup: "/images/projects/mockup-2.png",
     mockupClassName: "bottom-0 -right-[185px] h-[601px] w-[665px]",
     href: "#projects",
+    locked: true,
   },
   {
     id: "squadron",
@@ -36,5 +38,6 @@ export const projects = [
     mockup: "/images/projects/mockup-1.png",
     mockupClassName: "bottom-0 -right-[185px] h-[601px] w-[665px]",
     href: "#projects",
+    locked: true,
   },
 ] as const;
