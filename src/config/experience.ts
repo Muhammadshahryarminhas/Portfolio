@@ -1,7 +1,7 @@
 export const profile = {
   heading: "From junior screens to leading product design across teams.",
   intro:
-    "I started as a junior graphic and UI designer in 2020. Since then I've worked across SaaS, fintech, e-commerce, Web3, and enterprise — from branding and interfaces to research, prototypes, and shipping with engineers. Today I lead design at Solux and Solutionloft: setting direction, mentoring designers, and building products that have to work for real users and real business goals.",
+    "I started as a junior graphic and UI designer in 2020. Since then I've worked across SaaS, fintech, e-commerce, Web3, and enterprise, from branding and interfaces to research, prototypes, and shipping with engineers. Today I lead design at Solux and Solutionloft, setting direction, mentoring designers, and building products that have to work for real users and real business goals. These days I also lean on Claude, Cursor, and fast prototypes so we can explore more options before locking a direction.",
   photo: "/images/profile/myphoto.png",
 } as const;
 
