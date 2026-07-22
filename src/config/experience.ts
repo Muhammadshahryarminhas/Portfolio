@@ -1,7 +1,7 @@
 export const profile = {
-  heading: "My background had nothing to do with design. I ended up here anyway.",
+  heading: "From junior screens to leading product design across teams.",
   intro:
-    "Five years later, I've shipped consumer and B2B products used by millions. I work best in complex, cross-functional environments where the design problem is embedded inside a business problem. I'm actively exploring AI-augmented design workflows: using Claude, Cursor, and vibe-coded prototypes to move faster and test more ideas in less time.",
+    "I started as a junior graphic and UI designer in 2020. Since then I've worked across SaaS, fintech, e-commerce, Web3, and enterprise — from branding and interfaces to research, prototypes, and shipping with engineers. Today I lead design at Solux and Solutionloft: setting direction, mentoring designers, and building products that have to work for real users and real business goals.",
   photo: "/images/profile/myphoto.png",
 } as const;
 
