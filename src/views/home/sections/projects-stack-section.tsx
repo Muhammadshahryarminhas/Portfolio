@@ -21,6 +21,70 @@ const FOLLOW_STEP = 0.5;
 const SCROLL_PER_CARD = 0.65;
 const RELEASE_SCROLL = 0.2;
 
+function CaseStudyButton({
+  project,
+  size,
+}: {
+  project: (typeof projects)[number];
+  size: "mobile" | "desktop";
+}) {
+  const locked = project.locked;
+  const mobile = size === "mobile";
+  const icon = locked ? (
+    <Lock className={cn("text-black", mobile ? "size-4" : "size-5")} />
+  ) : (
+    <ArrowRight className={cn("text-black", mobile ? "size-4" : "size-5")} />
+  );
+
+  const inner = (
+    <>
+      <span
+        className={cn(
+          "flex items-center justify-center rounded-full bg-white",
+          mobile ? "size-10" : "size-12"
+        )}
+      >
+        {icon}
+      </span>
+      {mobile ? (
+        <span className="font-semibold">VIEW CASE STUDY</span>
+      ) : (
+        "VIEW CASE STUDY"
+      )}
+    </>
+  );
+
+  if (locked) {
+    return (
+      <Button
+        variant="lime"
+        size="pill-lg"
+        disabled
+        className={cn(
+          "w-fit gap-2 rounded-full pl-2",
+          mobile ? "h-14 py-2 pr-4" : "h-auto py-2 pr-5"
+        )}
+      >
+        {inner}
+      </Button>
+    );
+  }
+
+  return (
+    <Button
+      render={<Link href={project.href} />}
+      variant="lime"
+      size="pill-lg"
+      className={cn(
+        "w-fit gap-2 rounded-full pl-2",
+        mobile ? "h-14 py-2 pr-4" : "h-auto py-2 pr-5"
+      )}
+    >
+      {inner}
+    </Button>
+  );
+}
+
 function ProjectsHeader() {
   return (
     <div className="flex flex-col w-full gap-4 md:flex-row md:items-center md:justify-between md:gap-6">
@@ -90,21 +154,7 @@ function ProjectCardMobile({ project }: { project: (typeof projects)[number] }) 
                 {project.description}
               </p>
 
-              <Button
-                render={<Link href={project.href} />}
-                variant="lime"
-                size="pill-lg"
-                className="h-14 w-fit gap-2 rounded-full py-2 pr-4 pl-2"
-              >
-                <span className="flex size-10 items-center justify-center rounded-full bg-white">
-                  {"locked" in project && project.locked ? (
-                    <Lock className="size-4 text-black" />
-                  ) : (
-                    <ArrowRight className="size-4 text-black" />
-                  )}
-                </span>
-                <span className="font-semibold">VIEW CASE STUDY</span>
-              </Button>
+              <CaseStudyButton project={project} size="mobile" />
             </div>
           </div>
         </div>
@@ -188,21 +238,7 @@ function ProjectCard({
                   {project.description}
                 </p>
 
-                <Button
-                  render={<Link href={project.href} />}
-                  variant="lime"
-                  size="pill-lg"
-                  className="h-auto w-fit gap-2 rounded-full py-2 pr-5 pl-2"
-                >
-                  <span className="flex size-12 items-center justify-center rounded-full bg-white">
-                    {"locked" in project && project.locked ? (
-                      <Lock className="size-5 text-black" />
-                    ) : (
-                      <ArrowRight className="size-5 text-black" />
-                    )}
-                  </span>
-                  VIEW CASE STUDY
-                </Button>
+                <CaseStudyButton project={project} size="desktop" />
               </div>
             </div>
           </div>
@@ -213,7 +249,15 @@ function ProjectCard({
               project.mockupClassName
             )}
           >
-            <Image src={project.mockup} alt="" fill className="object-cover" />
+            <Image
+              src={project.mockup}
+              alt=""
+              fill
+              className={cn(
+                "object-cover",
+                "mockupImageClassName" in project && project.mockupImageClassName
+              )}
+            />
           </div>
         </div>
       </div>

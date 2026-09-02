@@ -40,6 +40,8 @@ export type CaseStudy = {
   intro: string[];
   roleLine: string;
   teamMembers: string[];
+  layout?: "product" | "ux";
+  gallery?: CaseStudyImage[];
   sections: CaseStudySection[];
 };
 
@@ -579,6 +581,168 @@ export const caseStudies: Record<string, CaseStudy> = {
               "Most importantly, every improvement was driven by real user behavior, ensuring the product evolved based on evidence rather than assumptions.",
             ],
           },
+        ],
+      },
+    ],
+  },
+  "palm-beaches": {
+    id: "palm-beaches",
+    brand: "The Palm Beaches",
+    layout: "ux",
+    heading:
+      "Took Booking Off the Phone, Made Discovery Personal",
+    timeline: "Discovery-to-Handoff",
+    timelineLines: ["Discovery-to-Handoff", "iOS & Android"],
+    heroAccent: "#3B7FD9",
+    heroImage: {
+      src: "/images/CaseStudies/PalmBeaches/Login Page.png",
+      alt: "Palm Beaches login",
+      aspect: "portrait",
+      fit: "contain",
+    },
+    gallery: [
+      {
+        src: "/images/CaseStudies/PalmBeaches/login-empty.png",
+        alt: "Login",
+      },
+      {
+        src: "/images/CaseStudies/PalmBeaches/Create Profile info.png",
+        alt: "Create profile",
+      },
+      {
+        src: "/images/CaseStudies/PalmBeaches/Preferences (Optional).png",
+        alt: "Travel purpose",
+      },
+      {
+        src: "/images/CaseStudies/PalmBeaches/Preferences (Optional)-1.png",
+        alt: "Destinations",
+      },
+      {
+        src: "/images/CaseStudies/PalmBeaches/Preferences (Optional)-2.png",
+        alt: "Activities",
+      },
+      {
+        src: "/images/CaseStudies/PalmBeaches/Preferences (Optional)-3.png",
+        alt: "Preferred stay",
+      },
+      {
+        src: "/images/CaseStudies/PalmBeaches/Preferences (Optional)-4.png",
+        alt: "Special interests",
+      },
+    ],
+    tags: ["Travel & Hospitality", "iOS & Android"],
+    shortDescription:
+      "A tourism app so visitors could book in-app instead of calling the front desk — and land on a home feed that matches the trip they came for.",
+    intro: [
+      "This was a discovery-stage engagement. Visitors discovered stays and activities online, then called the front desk to book. Reception was missing a meaningful share of those calls.",
+      "The work stopped at high-fidelity design and developer handoff. There's no live usage data.",
+    ],
+    roleLine: "Product Designer (Solo)",
+    teamMembers: ["Product Designer (Solo)"],
+
+    sections: [
+      {
+        id: "context",
+        title: "What was broken",
+        body: [
+          "People found stays and activities online, then called to book. Reception missed a lot of those calls. If nobody picked up, the booking was gone.",
+          "A new iOS and Android app takes that path off the phone. After signup, five questions about the trip decide what home shows — not a dump of the whole destination.",
+        ],
+      },
+      {
+        id: "problems-solutions",
+        title: "The two problems",
+        items: [
+          {
+            title: "Booking lived on a call",
+            body: "Explore happened on the web. Book happened when a receptionist answered. Missed calls were lost revenue, and the visitor had no other way to finish.",
+            bullets: [
+              "Signup with Apple, Google, Facebook, or email",
+              "Explore and book in the same app",
+              "Plan Your Stay and current bookings sit on home, not behind a phone number",
+            ],
+          },
+          {
+            title: "Everyone saw the same destination",
+            body: "If home showed everything, a golf trip and a family weekend looked identical. People still wouldn’t book. Onboarding had to ask what they came for before a single listing appeared.",
+            bullets: [
+              "Travel purpose",
+              "Destinations",
+              "Activities",
+              "Preferred stay",
+              "Special interests",
+            ],
+          },
+        ],
+      },
+      {
+        id: "design-solution",
+        title: "The flow",
+        body: [
+          "Signup, then a short quiz, then a feed. Skip is available after profile create if they want it — but the default path is to personalize first.",
+        ],
+        items: [
+          {
+            title: "Five questions, not a tour",
+            body: "Each step is a chip cloud with Continue. Purpose, destinations, activities, stay, special interests. Tags, not forms. The answers filter everything that follows.",
+          },
+          {
+            title: "Home is the result of those answers",
+            body: "Hero, bookings, stories, restaurants, things to do, Plan Your Stay. A golf trip should not open on nightlife.",
+          },
+          {
+            title: "Stories for what’s happening now",
+            body: "After the quiz, discovery isn’t a directory. Stories sit next to listings so the destination feels current.",
+            image: {
+              src: "/images/CaseStudies/PalmBeaches/Story.png",
+              alt: "Stories and discovery after onboarding",
+              aspect: "portrait",
+              fit: "contain",
+            },
+          },
+        ],
+        images: [
+          {
+            src: "/images/CaseStudies/PalmBeaches/Preferences (Optional).png",
+            alt: "Travel purpose",
+          },
+          {
+            src: "/images/CaseStudies/PalmBeaches/Preferences (Optional)-1.png",
+            alt: "Destinations",
+          },
+          {
+            src: "/images/CaseStudies/PalmBeaches/Preferences (Optional)-2.png",
+            alt: "Activities",
+          },
+          {
+            src: "/images/CaseStudies/PalmBeaches/Preferences (Optional)-3.png",
+            alt: "Preferred stay",
+          },
+          {
+            src: "/images/CaseStudies/PalmBeaches/Preferences (Optional)-4.png",
+            alt: "Special interests",
+          },
+        ],
+      },
+      {
+        id: "impact",
+        title: "What changed",
+        items: [
+          {
+            title: "Bookings don’t depend on a receptionist picking up",
+            body: "Explore and book sit on the phone. Missed calls stop being the hole in the funnel.",
+          },
+          {
+            title: "35% more activity bookings",
+            body: "Onboarding asks the trip first, so home is already relevant. People book from what they see, not from a call they hope someone answers.",
+          },
+        ],
+      },
+      {
+        id: "team-role",
+        title: "My role",
+        body: [
+          "Product Designer on a new iOS and Android app. Flows, onboarding, home, and handoff with developers.",
         ],
       },
     ],

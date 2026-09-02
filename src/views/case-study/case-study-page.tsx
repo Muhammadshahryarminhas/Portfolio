@@ -6,14 +6,12 @@ import Link from "next/link";
 import { Dialog } from "@base-ui/react/dialog";
 import {
   ArrowLeft,
-  ArrowRight,
   Ban,
   ChevronsRight,
   Clock,
   Code2,
   Crop,
   ImageOff,
-  Lock,
   Monitor,
   Smartphone,
   Sparkles,
@@ -26,7 +24,8 @@ import {
   type CaseStudyImage,
   type CaseStudySection,
 } from "@/config/case-studies";
-import { projects } from "@/config/projects";
+import { MoreWork } from "@/views/case-study/more-work";
+import { PalmBeachesPage } from "@/views/case-study/palm-beaches-page";
 import { cn } from "@/lib/utils";
 
 function sectionById(study: CaseStudy, id: string) {
@@ -375,84 +374,269 @@ function PhaseSection({ section, eyebrow }: { section: CaseStudySection; eyebrow
   );
 }
 
-function MoreWork() {
-  const others = projects.filter((p) => p.id !== "brandpulse").slice(0, 2);
+function PhoneStrip({
+  images,
+  dark,
+}: {
+  images: CaseStudyImage[];
+  dark?: boolean;
+}) {
+  const shots = images.filter((image) => image.src);
 
   return (
-    <section className="border-t border-[#F0F0F2] py-16 md:py-20">
-      <h2 className="mb-10 text-sm font-semibold uppercase tracking-[0.14em] text-[#7A7A86]">
-        Check out more work
-      </h2>
-      <div className="grid gap-10 sm:grid-cols-2 sm:gap-6 lg:gap-10">
-        {others.map((project) => {
-          const locked = "locked" in project && project.locked;
-          const content = (
-            <>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#2C2C30]">
-                <Image
-                  src={project.mockup}
-                  alt=""
-                  fill
-                  className="object-contain object-[right_bottom] transition-transform duration-500 group-hover:scale-[1.02]"
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                />
-              </div>
-              <div className="flex flex-col gap-2.5 pt-4 sm:gap-3 sm:pt-5">
-                <div className="relative h-7 w-36 sm:h-8 sm:w-40">
-                  <Image
-                    src={project.logo}
-                    alt=""
-                    fill
-                    className={cn(
-                      "object-contain object-left",
-                      "logoImageClassName" in project && project.logoImageClassName
-                    )}
-                  />
-                </div>
-                <p className="text-sm text-[#7A7A86]">{project.tags.join(" · ")}</p>
-                <h3 className="text-lg font-semibold tracking-[-0.4px] text-[#111118] sm:text-xl lg:text-2xl">
-                  {project.title}
-                </h3>
-                <p className="line-clamp-3 text-sm leading-relaxed text-[#5C5C68] sm:text-base">
-                  {project.description}
-                </p>
-                <span className="mt-1 inline-flex items-center gap-1.5 text-sm font-medium text-[#111118]">
-                  {locked ? (
-                    <>
-                      Coming soon
-                      <Lock className="size-3.5" />
-                    </>
-                  ) : (
-                    <>
-                      View case study
-                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-                    </>
-                  )}
-                </span>
-              </div>
-            </>
-          );
-
-          if (locked) {
-            return (
-              <div key={project.id} className="group flex flex-col">
-                {content}
-              </div>
-            );
-          }
-
-          return (
-            <Link key={project.id} href={project.href} className="group flex flex-col">
-              {content}
-            </Link>
-          );
-        })}
+    <div className="-mx-4 overflow-x-auto px-4 md:mx-0 md:px-0">
+      <div className="flex w-max gap-3 sm:gap-4">
+        {shots.map((image) => (
+          <PhoneScreen key={image.src} image={image} dark={dark} />
+        ))}
       </div>
-    </section>
+    </div>
+  );
+}
+
+function PhoneScreen({
+  image,
+  dark,
+  className,
+}: {
+  image: CaseStudyImage;
+  dark?: boolean;
+  className?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  if (!image.src) return null;
+
+  return (
+    <figure className={cn("w-[168px] shrink-0 sm:w-[200px] md:w-[220px]", className)}>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        aria-label={`Preview image: ${image.alt}`}
+        className="relative block aspect-[428/926] w-full cursor-zoom-in overflow-hidden rounded-[28px] bg-white shadow-[0_12px_40px_rgba(0,0,0,0.18)]"
+      >
+        <Image
+          src={image.src}
+          alt={image.alt}
+          fill
+          quality={90}
+          className="object-cover object-top"
+          sizes="220px"
+        />
+      </button>
+      <figcaption
+        className={cn(
+          "mt-2 text-center text-xs leading-snug sm:text-sm",
+          dark ? "text-[#9A9AA6]" : "text-[#7A7A86]"
+        )}
+      >
+        {image.alt}
+      </figcaption>
+      <ImageLightbox
+        open={open}
+        onOpenChange={setOpen}
+        src={image.src}
+        alt={image.alt}
+      />
+    </figure>
+  );
+}
+
+function UxCaseStudyPage({ study }: { study: CaseStudy }) {
+  const context = sectionById(study, "context");
+  const problems = sectionById(study, "problems-solutions");
+  const solution = sectionById(study, "design-solution");
+  const impact = sectionById(study, "impact");
+  const team = sectionById(study, "team-role");
+
+  return (
+    <main
+      className="min-h-dvh bg-white text-[#1A1A22]"
+      style={{ ["--case-accent" as string]: study.heroAccent }}
+    >
+      <div className="sticky top-0 z-30 bg-white/80 backdrop-blur-md">
+        <div className="mx-auto w-full max-w-7xl px-4 py-3 sm:py-4 md:px-8">
+          <Link
+            href="/#projects"
+            className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-[#1A1A22] transition-opacity hover:opacity-70"
+          >
+            <ArrowLeft className="size-4" strokeWidth={1.75} />
+            Back to works
+          </Link>
+        </div>
+      </div>
+
+      <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
+        <header className="flex flex-col gap-6 pb-12 pt-2 md:gap-8 md:pb-16 md:pt-8">
+          <h1 className="max-w-[22ch] text-[28px] font-semibold leading-[1.15] tracking-[-0.8px] text-[#111118] sm:max-w-[28ch] sm:text-[36px] md:text-[44px] md:tracking-[-1.2px]">
+            {study.heading}
+          </h1>
+          <p className="max-w-3xl text-base leading-[1.75] text-[#3D3D48] md:text-lg">
+            {study.shortDescription}
+          </p>
+          <p className="text-sm text-[#7A7A86]">
+            {study.roleLine}
+            {study.timelineLines?.map((line) => (
+              <span key={line}>
+                <span className="mx-2 text-[#D0D0D6]">·</span>
+                {line}
+              </span>
+            ))}
+          </p>
+          {study.gallery?.length ? (
+            <PhoneStrip images={study.gallery} />
+          ) : (
+            <PlaceholderImage priority image={study.heroImage} />
+          )}
+        </header>
+
+        {context && (
+          <section className="grid gap-10 border-t border-[#F0F0F2] py-14 md:grid-cols-2 md:gap-16 md:py-20">
+            <div>
+              <p className="mb-3 text-sm font-medium text-[#7A7A86]">Before</p>
+              <p className="text-lg leading-[1.7] text-[#1A1A22] md:text-xl md:leading-[1.65]">
+                {context.body?.[0]}
+              </p>
+            </div>
+            <div>
+              <p className="mb-3 text-sm font-medium text-[#7A7A86]">After</p>
+              <p className="text-lg leading-[1.7] text-[#1A1A22] md:text-xl md:leading-[1.65]">
+                {context.body?.[1]}
+              </p>
+            </div>
+          </section>
+        )}
+
+        {problems && (
+          <section className="border-t border-[#F0F0F2] py-14 md:py-20">
+            <h2 className="mb-10 text-2xl font-semibold tracking-[-0.5px] text-[#111118] md:mb-14 md:text-[32px]">
+              {problems.title}
+            </h2>
+            <div className="flex flex-col gap-12 md:gap-16">
+              {problems.items?.map((item, index) => (
+                <div
+                  key={item.title}
+                  className="grid gap-4 md:grid-cols-[72px_minmax(0,1fr)] md:gap-8"
+                >
+                  <p className="text-sm tabular-nums text-[#9A9AA6]">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-xl font-semibold tracking-[-0.3px] text-[#111118]">
+                      {item.title}
+                    </h3>
+                    <p className="max-w-3xl text-base leading-[1.7] text-[#3D3D48] md:text-lg">
+                      {item.body}
+                    </p>
+                    {item.bullets && (
+                      <ul className="mt-2 flex max-w-xl list-disc flex-col gap-1.5 pl-5 text-base leading-relaxed text-[#2A2A32]">
+                        {item.bullets.map((b) => (
+                          <li key={b}>{b}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+
+      {solution && (
+        <section className="w-full bg-[#111111] text-white">
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 px-4 py-14 md:gap-16 md:px-8 md:py-20">
+            <div className="flex max-w-3xl flex-col gap-4">
+              <h2 className="text-2xl font-semibold tracking-[-0.5px] md:text-[32px]">
+                {solution.title}
+              </h2>
+              {solution.body?.map((p) => (
+                <p key={p.slice(0, 40)} className="text-base leading-[1.7] text-[#B8B8C0] md:text-lg">
+                  {p}
+                </p>
+              ))}
+            </div>
+
+            {solution.items
+              ?.filter((item) => !item.image)
+              .map((item) => (
+                <div key={item.title} className="flex max-w-3xl flex-col gap-3">
+                  <h3 className="text-xl font-semibold tracking-[-0.3px] md:text-2xl">
+                    {item.title}
+                  </h3>
+                  <p className="text-base leading-[1.7] text-[#B8B8C0] md:text-lg">{item.body}</p>
+                </div>
+              ))}
+
+            {solution.images?.some((image) => image.src) && (
+              <PhoneStrip dark images={solution.images.filter((image) => image.src)} />
+            )}
+
+            <div className="grid gap-12 md:grid-cols-2 md:gap-16 md:items-start">
+              {solution.items
+                ?.filter((item) => item.image?.src)
+                .map((item) => (
+                <div key={item.title} className="flex flex-col gap-4">
+                  <h3 className="text-xl font-semibold tracking-[-0.3px] md:text-2xl">
+                    {item.title}
+                  </h3>
+                  <p className="text-base leading-[1.7] text-[#B8B8C0] md:text-lg">{item.body}</p>
+                  {item.image?.src && (
+                    <PhoneScreen dark className="mt-2 w-[200px] md:w-[240px]" image={item.image} />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
+        {impact && (
+          <section className="border-t border-[#F0F0F2] py-14 md:py-20">
+            <h2 className="mb-10 text-2xl font-semibold tracking-[-0.5px] text-[#111118] md:mb-14 md:text-[32px]">
+              {impact.title}
+            </h2>
+            <div className="grid gap-10 md:grid-cols-2 md:gap-16">
+              {impact.items?.map((item) => (
+                <div key={item.title} className="flex flex-col gap-3">
+                  <h3 className="text-xl font-semibold tracking-[-0.3px] text-[#111118]">
+                    {item.title}
+                  </h3>
+                  <p className="text-base leading-[1.7] text-[#3D3D48] md:text-lg">{item.body}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {team && (
+          <section className="border-t border-[#F0F0F2] py-14 md:py-20">
+            <h2 className="mb-4 text-2xl font-semibold tracking-[-0.5px] text-[#111118] md:text-[32px]">
+              {team.title}
+            </h2>
+            {team.body?.map((p) => (
+              <p key={p.slice(0, 40)} className="max-w-3xl text-base leading-[1.7] text-[#3D3D48] md:text-lg">
+                {p}
+              </p>
+            ))}
+          </section>
+        )}
+
+        <MoreWork currentId={study.id} />
+      </div>
+    </main>
   );
 }
 
 export function CaseStudyPage({ study }: { study: CaseStudy }) {
+  if (study.id === "palm-beaches") {
+    return <PalmBeachesPage study={study} />;
+  }
+
+  if (study.layout === "ux") {
+    return <UxCaseStudyPage study={study} />;
+  }
+
   const impact = sectionById(study, "impact");
   const context = sectionById(study, "context");
   const problems = sectionById(study, "problems-solutions");
@@ -810,7 +994,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
                     className="w-full"
                     image={
                       item.image ?? {
-                        alt: `${item.title} UI placeholder — BrandPulse case study visual`,
+                        alt: `${item.title} UI placeholder`,
                         aspect: "portrait",
                       }
                     }
@@ -833,7 +1017,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
         {/* Phase 2 */}
         {phase2 && <PhaseSection section={phase2} eyebrow="Phase 2" />}
 
-        <MoreWork />
+        <MoreWork currentId={study.id} />
       </div>
     </main>
   );
