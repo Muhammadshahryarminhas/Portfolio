@@ -377,8 +377,8 @@ function FiveQuestions() {
           }}
         />
 
-        <div className="relative mx-auto flex h-full w-full max-w-7xl flex-col gap-8 overflow-y-auto px-4 pb-8 pt-28 sm:px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:overflow-x-visible lg:overflow-y-hidden lg:px-8 lg:pb-0 lg:pt-20">
-          <div className="relative min-w-0">
+        <div className="relative mx-auto flex h-full w-full max-w-7xl flex-col gap-5 overflow-y-auto px-4 pb-4 pt-24 sm:px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-8 lg:overflow-x-visible lg:overflow-y-hidden lg:px-8 lg:pb-0 lg:pt-20">
+          <div className="relative min-w-0 shrink-0">
             {isOnboarding || isAfter ? (
               <SegmentBar
                 count={isAfter ? AFTER_HOME.length : ONBOARDING.length}
@@ -388,16 +388,16 @@ function FiveQuestions() {
             ) : null}
             <div
               className={cn(
-                "relative grid min-w-0",
-                (isOnboarding || isAfter) && "mt-10 lg:mt-0"
+                "relative min-w-0",
+                (isOnboarding || isAfter) && "mt-6 lg:mt-0"
               )}
             >
               <div
                 className={cn(
-                  "col-start-1 row-start-1 flex flex-col gap-6 transition-opacity duration-500 ease-out md:gap-8",
+                  "flex flex-col gap-4 transition-opacity duration-500 ease-out md:gap-8",
                   isFlow
-                    ? "opacity-100"
-                    : "pointer-events-none opacity-0"
+                    ? "relative opacity-100"
+                    : "pointer-events-none absolute inset-x-0 top-0 opacity-0"
                 )}
               >
                 <h2 className="text-[32px] font-semibold leading-[1.1] tracking-[-1px] text-white md:text-[44px]">
@@ -429,10 +429,10 @@ function FiveQuestions() {
 
               <div
                 className={cn(
-                  "col-start-1 row-start-1 flex flex-col gap-6 transition-opacity duration-500 ease-out md:gap-8",
+                  "flex flex-col gap-4 transition-opacity duration-500 ease-out md:gap-8",
                   isOnboarding
-                    ? "opacity-100"
-                    : "pointer-events-none opacity-0"
+                    ? "relative opacity-100"
+                    : "pointer-events-none absolute inset-x-0 top-0 opacity-0"
                 )}
               >
                 <h2 className="max-w-[14ch] text-[32px] font-semibold leading-[1.1] tracking-[-1px] text-[#111118] md:text-[44px]">
@@ -448,10 +448,10 @@ function FiveQuestions() {
 
               <div
                 className={cn(
-                  "col-start-1 row-start-1 flex flex-col gap-6 transition-opacity duration-500 ease-out md:gap-8",
+                  "flex flex-col gap-4 transition-opacity duration-500 ease-out md:gap-8",
                   isHome
-                    ? "opacity-100"
-                    : "pointer-events-none opacity-0"
+                    ? "relative opacity-100"
+                    : "pointer-events-none absolute inset-x-0 top-0 opacity-0"
                 )}
               >
                 <p className="text-sm font-medium tabular-nums text-white/50">
@@ -486,10 +486,10 @@ function FiveQuestions() {
 
               <div
                 className={cn(
-                  "col-start-1 row-start-1 flex flex-col gap-6 transition-opacity duration-500 ease-out md:gap-8",
+                  "flex flex-col gap-4 transition-opacity duration-500 ease-out md:gap-8",
                   isAfter
-                    ? "opacity-100"
-                    : "pointer-events-none opacity-0"
+                    ? "relative opacity-100"
+                    : "pointer-events-none absolute inset-x-0 top-0 opacity-0"
                 )}
               >
                 <h2 className="max-w-[16ch] text-[32px] font-semibold leading-[1.1] tracking-[-1px] text-white md:text-[44px]">
@@ -503,7 +503,7 @@ function FiveQuestions() {
             </div>
           </div>
 
-          <div className="relative mx-auto w-max max-w-full shrink-0 lg:mx-0">
+          <div className="relative mx-auto flex min-h-0 w-full flex-1 items-center justify-center lg:mx-0 lg:block lg:h-auto lg:w-max lg:flex-none">
             <div
               className={cn(
                 "absolute inset-[8%] rounded-[2.5rem] blur-3xl transition-opacity duration-500 ease-out",
@@ -512,7 +512,7 @@ function FiveQuestions() {
             />
             <div
               className={cn(
-                "flex gap-3 transition-opacity duration-500 ease-out sm:gap-4",
+                "flex w-full max-w-full justify-center gap-3 px-1 transition-opacity duration-500 ease-out sm:gap-4 lg:h-auto lg:w-auto lg:px-0",
                 isFlow
                   ? "relative opacity-100"
                   : "pointer-events-none absolute top-1/2 right-0 -translate-y-1/2 opacity-0"
@@ -524,7 +524,7 @@ function FiveQuestions() {
               ].map((shot) => (
                 <div
                   key={shot.src}
-                  className="relative h-[min(48svh,420px)] w-[calc(min(48svh,420px)*9/19)] shrink-0 drop-shadow-[0_24px_40px_rgba(0,0,0,0.28)] lg:h-[min(78svh,720px)] lg:w-[calc(min(78svh,720px)*9/19)]"
+                  className="relative aspect-[9/19] h-auto w-[calc(50%-10px)] max-h-[min(48svh,420px)] shrink-0 drop-shadow-[0_24px_40px_rgba(0,0,0,0.28)] lg:aspect-auto lg:h-[min(78svh,720px)] lg:w-[calc(min(78svh,720px)*9/19)] lg:max-h-none"
                 >
                   <Image
                     src={shot.src}
@@ -538,7 +538,7 @@ function FiveQuestions() {
             </div>
             <div
               className={cn(
-                "relative h-[min(58svh,520px)] w-[calc(min(58svh,520px)*9/19)] drop-shadow-[0_24px_40px_rgba(0,0,0,0.18)] transition-opacity duration-500 ease-out lg:h-[min(78svh,720px)] lg:w-[calc(min(78svh,720px)*9/19)]",
+                "relative aspect-[9/19] h-full w-auto drop-shadow-[0_24px_40px_rgba(0,0,0,0.18)] transition-opacity duration-500 ease-out lg:aspect-auto lg:h-[min(78svh,720px)] lg:w-[calc(min(78svh,720px)*9/19)]",
                 isFlow
                   ? "pointer-events-none absolute top-1/2 right-0 -translate-y-1/2 opacity-0"
                   : "opacity-100"
@@ -681,20 +681,20 @@ export function PalmBeachesPage({ study }: { study: CaseStudy }) {
                 If reception didn&apos;t pick up, the booking was gone.
               </p>
               <div className="grid gap-3 sm:gap-4 md:grid-cols-2 md:gap-5">
-                <div className="rounded-2xl bg-white/20 p-5 md:p-6">
-                  <p className="mb-2 text-sm font-medium text-white/70">
+                <div className="rounded-2xl bg-white p-5 md:p-6">
+                  <p className="mb-2 text-sm font-medium text-[#7A7A86]">
                     What we found
                   </p>
-                  <p className="text-base leading-[1.7] text-white md:text-lg md:leading-[1.65]">
+                  <p className="text-base leading-[1.7] text-[#111118] md:text-lg md:leading-[1.65]">
                     People found stays and activities online, then called to
                     book. Reception missed a lot of those calls.
                   </p>
                 </div>
-                <div className="rounded-2xl bg-white/20 p-5 md:p-6">
-                  <p className="mb-2 text-sm font-medium text-white/70">
+                <div className="rounded-2xl bg-white p-5 md:p-6">
+                  <p className="mb-2 text-sm font-medium text-[#7A7A86]">
                     What this page covers
                   </p>
-                  <p className="text-base leading-[1.7] text-white md:text-lg md:leading-[1.65]">
+                  <p className="text-base leading-[1.7] text-[#111118] md:text-lg md:leading-[1.65]">
                     The client left after handoff, before development. No live
                     data — just the reasoning, and what I would&apos;ve
                     measured.
