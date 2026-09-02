@@ -6,13 +6,13 @@ import { assets } from "@/config/assets";
 
 function SnapCard({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="relative h-[280px] w-[min(72vw,524px)] shrink-0 overflow-hidden rounded-[22px] bg-[#f4f4f4] sm:h-[360px] md:h-[449px] md:w-[524px]">
+    <div className="relative aspect-[1600/1200] w-[min(72vw,600px)] shrink-0 overflow-hidden rounded-[22px] bg-[#f4f4f4] md:w-[600px]">
       <Image
         src={src}
         alt={alt}
         fill
-        className="object-cover object-top"
-        sizes="(max-width: 768px) 72vw, 524px"
+        className="object-cover"
+        sizes="(max-width: 768px) 72vw, 600px"
       />
     </div>
   );
@@ -26,7 +26,7 @@ function MarqueeRow({
   direction: "left-to-right" | "right-to-left";
 }) {
   return (
-    <div className="h-[280px] w-full overflow-hidden sm:h-[360px] md:h-[449px]">
+    <div className="w-full overflow-hidden">
       <div
         className={cn(
           "flex w-max gap-3",
