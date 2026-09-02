@@ -63,14 +63,14 @@ const AFTER_HOME = [
     alt: "Dining",
     label: "Dining",
     heading: "Explore, Deals, Dining",
-    body: "Dining is standing outside deciding. Same chip filters as onboarding — nothing new to learn.",
+    body: "Dining is standing outside deciding. Same chip filters as onboarding. Nothing new to learn.",
   },
   {
     src: IMG.event,
     alt: "Event details",
     label: "Event page",
     heading: "Event page",
-    body: "When, where, worth it — above the fold. Related events sit at the bottom, after they've confirmed this one.",
+    body: "When, where, worth it. That sits above the fold. Related events wait at the bottom, after they've confirmed this one.",
   },
 ] as const;
 
@@ -440,7 +440,7 @@ function FiveQuestions() {
                 </h2>
                 <p className="max-w-[36ch] text-base leading-[1.7] text-[#3D3D48] md:text-lg">
                   Purpose, destinations, activities, stay, interests. Each step
-                  is chips with a min and max — enough to personalize, not so
+                  is chips with a min and a max. Enough to personalize, not so
                   many that the answers blur.
                 </p>
                 <StepRail steps={ONBOARDING} active={onboardingIndex} />
@@ -461,27 +461,10 @@ function FiveQuestions() {
                   Home follows the answers
                 </h2>
                 <p className="max-w-[38ch] text-base leading-[1.7] text-[#B0B0BA] md:text-lg">
-                  Hero, bookings, stories, dining, activities, Plan Your Stay —
-                  they all shift off onboarding. If home didn&apos;t change, the
+                  Hero, bookings, stories, dining, activities, Plan Your Stay.
+                  They all shift off onboarding. If home didn&apos;t change, the
                   quiz was just friction.
                 </p>
-                <div className="flex max-w-md flex-wrap gap-2">
-                  {[
-                    "Hero",
-                    "Bookings",
-                    "Stories",
-                    "Dining",
-                    "Activities",
-                    "Plan Your Stay",
-                  ].map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-sm text-white/80"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
               </div>
 
               <div
@@ -696,8 +679,7 @@ export function PalmBeachesPage({ study }: { study: CaseStudy }) {
                   </p>
                   <p className="text-base leading-[1.7] text-[#111118] md:text-lg md:leading-[1.65]">
                     The client left after handoff, before development. No live
-                    data — just the reasoning, and what I would&apos;ve
-                    measured.
+                    data. Just the reasoning, and what I would&apos;ve measured.
                   </p>
                 </div>
               </div>
@@ -768,7 +750,7 @@ export function PalmBeachesPage({ study }: { study: CaseStudy }) {
               call.
             </p>
             <p className="mt-auto text-base leading-[1.7] text-[#3D3D48]">
-              No made-up conversion number. I don&apos;t have it — engagement
+              No made-up conversion number. I don&apos;t have it. Engagement
               ended before development.
             </p>
           </article>
@@ -806,7 +788,7 @@ export function PalmBeachesPage({ study }: { study: CaseStudy }) {
             </h2>
             <ol className="flex flex-col gap-4">
               {[
-                "A low-fi pass first — some chip details got over-designed because the structure wasn't locked.",
+                "I'd do a low-fi pass first. Some chip details got over-designed because the structure wasn't locked.",
                 "Log drop-off early, so if a client leaves mid-project there's still a number to talk about.",
               ].map((line) => (
                 <li

@@ -20,7 +20,7 @@ export const projects = [
     title: "Took Booking Off the Phone, Made Discovery Personal",
     tags: ["Travel & Hospitality", "iOS & Android"],
     description:
-      "A tourism app so visitors could book in-app instead of calling the front desk — and land on a home feed that matches the trip they came for.",
+      "A tourism app so visitors could book in-app instead of calling the front desk. The home feed matches the trip they came for.",
     mockup: "/images/projects/mockup-2.png",
     mockupClassName: "bottom-0 -right-[185px] h-[601px] w-[665px]",
     href: "/work/palm-beaches",

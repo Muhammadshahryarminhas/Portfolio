@@ -632,7 +632,7 @@ export const caseStudies: Record<string, CaseStudy> = {
     ],
     tags: ["Travel & Hospitality", "iOS & Android"],
     shortDescription:
-      "A tourism app so visitors could book in-app instead of calling the front desk — and land on a home feed that matches the trip they came for.",
+      "A tourism app so visitors could book in-app instead of calling the front desk. The home feed matches the trip they came for.",
     intro: [
       "This was a discovery-stage engagement. Visitors discovered stays and activities online, then called the front desk to book. Reception was missing a meaningful share of those calls.",
       "The work stopped at high-fidelity design and developer handoff. There's no live usage data.",
@@ -646,7 +646,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         title: "What was broken",
         body: [
           "People found stays and activities online, then called to book. Reception missed a lot of those calls. If nobody picked up, the booking was gone.",
-          "A new iOS and Android app takes that path off the phone. After signup, five questions about the trip decide what home shows — not a dump of the whole destination.",
+          "A new iOS and Android app takes that path off the phone. After signup, five questions about the trip decide what home shows. Not a dump of the whole destination.",
         ],
       },
       {
@@ -679,7 +679,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         id: "design-solution",
         title: "The flow",
         body: [
-          "Signup, then a short quiz, then a feed. Skip is available after profile create if they want it — but the default path is to personalize first.",
+          "Signup, then a short quiz, then a feed. Skip is available after profile create if they want it. The default path is still to personalize first.",
         ],
         items: [
           {
