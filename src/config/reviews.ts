@@ -50,15 +50,4 @@ export const reviews = [
       "I've had the pleasure of working with Shahryar for over five years, and his creativity and attention to detail always impress me. A truly talented graphic designer who brings ideas to life effortlessly!",
     truncated: false,
   },
-  {
-    id: "gulraiz-ai-2",
-    name: "Gulraiz Afzal Khan",
-    role: "AI-Native Product Designer",
-    avatar: "/images/reviews/avatar-2.png",
-    quote:
-      "I highly recommend Shahryar Minhas as a UX/UI Engineer. He's incredibly creative and embodies the principle of \"preparation is key,\" always focusing on getting things right from the start. With a keen eye for detail, he ensures that every aspect of his work is polished to perfection. Shahryar is a great team player, collaborating effectively with others to achieve shared goals. His commitment to meeting deadlines while delivering top-notch results is truly impressive. It's been a pleasure working with him, and I have no doubt he'll continue to excel in his future endeavors.",
-    preview:
-      "I highly recommend Shahryar Minhas as a UX/UI Engineer. He's incredibly creative and embodies the principle of \"preparation is key,\" always focusing on getting things right from the start. With a keen eye for detail, he ensures that every aspect of his work is polished to perfection. Shahryar is a great",
-    truncated: true,
-  },
 ] as const;
