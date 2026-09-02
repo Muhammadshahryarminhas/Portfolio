@@ -249,15 +249,7 @@ function ProjectCard({
               project.mockupClassName
             )}
           >
-            <Image
-              src={project.mockup}
-              alt=""
-              fill
-              className={cn(
-                "object-cover",
-                "mockupImageClassName" in project && project.mockupImageClassName
-              )}
-            />
+            <Image src={project.mockup} alt="" fill className="object-cover" />
           </div>
         </div>
       </div>
