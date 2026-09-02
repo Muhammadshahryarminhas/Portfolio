@@ -21,9 +21,8 @@ export const projects = [
     tags: ["Travel & Hospitality", "iOS & Android"],
     description:
       "A tourism app so visitors could book in-app instead of calling the front desk — and land on a home feed that matches the trip they came for.",
-    mockup: "/images/CaseStudies/PalmBeaches/Login Page.png",
-    mockupClassName: "bottom-0 right-6 h-[560px] w-[260px]",
-    mockupImageClassName: "object-contain object-bottom",
+    mockup: "/images/projects/mockup-2.png",
+    mockupClassName: "bottom-0 -right-[185px] h-[601px] w-[665px]",
     href: "/work/palm-beaches",
     locked: false,
   },
